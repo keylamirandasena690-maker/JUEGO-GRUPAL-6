@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número | Code Power</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="logo">Code Power</div>
+
+        <a href="../index.html" class="volver">
+            ← Volver
+        </a>
+    </header>
+
+    <main>
+
+        <section class="contenedor-juego">
+
+            <div class="icono">🔢</div>
+
+            <h1>Adivina el Número</h1>
+
+            <p class="instruccion">
+                Hemos pensado un número entre <strong>1 y 100</strong>.
+                ¡Intenta descubrir cuál es!
+            </p>
+
+            <div class="panel">
+
+                <div class="dato">
+                    <span>Intentos</span>
+                    <strong id="contador">0</strong>
+                </div>
+
+                <div class="dato">
+                    <span>Rango</span>
+                    <strong>1 - 100</strong>
+                </div>
+
+            </div>
+
+            <div class="zona-juego">
+
+                <label for="numeroUsuario">
+                    Escribe tu número:
+                </label>
+
+                <input 
+                    type="number"
+                    id="numeroUsuario"
+                    min="1"
+                    max="100"
+                    placeholder="Ej. 50"
+                >
+
+                <button id="btnAdivinar">
+                    Adivinar
+                </button>
+
+                <p id="mensaje">
+                    ¡Escribe un número para comenzar!
+                </p>
+
+            </div>
+
+            <button id="btnReiniciar" class="btn-reiniciar">
+                🔄 Reiniciar juego
+            </button>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Code Power | Proyecto SENA</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
