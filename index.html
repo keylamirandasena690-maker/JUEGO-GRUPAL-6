@@ -1,522 +1,468 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Code Power | Juegos</title>
+    <title>Code Power | Zona Gamer</title>
 
-    <!-- Conexión con el diseño -->
     <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-    <!-- =====================================================
-         PANTALLA DE LOGIN
-    ====================================================== -->
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
 
-    <section id="loginScreen" class="login-screen">
+    <header class="encabezado">
 
-        <div class="login-background"></div>
-
-        <div class="login-card">
-
-            <div class="logo-login">
-                <div class="logo-icon">🎮</div>
-
-                <h1>CODE <span>POWER</span></h1>
-
-                <p>Proyecto de juegos</p>
-            </div>
-
-            <div class="login-title">
-                <h2>¡Bienvenido!</h2>
-                <p>Ingresa para comenzar a jugar</p>
-            </div>
-
-            <form id="loginForm">
-
-                <div class="input-group">
-                    <label for="username">Usuario</label>
-
-                    <div class="input-wrapper">
-                        <input
-                            type="text"
-                            id="username"
-                            placeholder="Escribe tu usuario"
-                            autocomplete="off"
-                        >
-                    </div>
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="password">Contraseña</label>
-
-                    <div class="input-wrapper">
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Escribe tu contraseña"
-                        >
-
-                        <button
-                            type="button"
-                            id="togglePassword"
-                            class="toggle-password"
-                        >
-                            👁
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="login-button"
-                >
-                    Entrar
-                </button>
-
-                <p
-                    id="loginMessage"
-                    class="login-message"
-                ></p>
-
-            </form>
-
+        <div class="logo">
+            <span>💻</span>
+            <h1>Code Power</h1>
         </div>
 
-    </section>
-
-
-    <!-- =====================================================
-         APLICACIÓN PRINCIPAL
-    ====================================================== -->
-
-    <div id="mainApp" class="hidden">
-
-
-        <!-- =================================================
-             BARRA DE NAVEGACIÓN
-        ================================================== -->
-
-        <nav class="navbar">
-
-            <div class="nav-logo">
-                CODE <span>POWER</span>
-            </div>
-
-
-            <div class="nav-links">
-
-                <button
-                    class="nav-button active"
-                    data-section="home"
-                >
-                    🏠 Inicio
-                </button>
-
-                <button
-                    class="nav-button"
-                    data-section="about"
-                >
-                    📚 Acerca de
-                </button>
-
-                <button
-                    id="logoutButton"
-                    class="logout-button"
-                >
-                    🚪 Salir
-                </button>
-
-            </div>
-
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#proyecto">Proyecto</a>
+            <a href="#juegos">Juegos</a>
+            <a href="#equipo">Equipo</a>
         </nav>
 
+    </header>
 
 
-        <!-- =================================================
-             SECCIÓN INICIO
-        ================================================== -->
+    <!-- =========================
+         CONTENIDO
+    ========================== -->
 
-        <section id="homeSection">
+    <main>
 
-            <main>
+        <!-- INICIO -->
+
+        <section id="inicio" class="inicio">
+
+            <div class="inicio-texto">
+
+                <p class="etiqueta">
+                    🎮 PROYECTO SENA
+                </p>
+
+                <h2>
+                    Aprende a programar
+                    <span>jugando</span>
+                </h2>
+
+                <p class="descripcion-inicio">
+                    Bienvenidos a Code Power, un proyecto creado
+                    para aprender programación de una manera
+                    divertida, sencilla y entretenida.
+                </p>
+
+                <a href="#juegos" class="boton-principal">
+                    🎮 Ver nuestros juegos
+                </a>
+
+            </div>
 
 
-                <!-- HERO -->
+            <div class="inicio-imagen">
 
-                <div class="hero">
+                <div class="tarjeta-principal">
 
-                    <div class="hero-text">
-
-                        <h1>
-                            Bienvenido a
-                            <span>Code Power</span>
-                        </h1>
-
-                        <p>
-                            Este es nuestro proyecto de juegos
-                            realizado para poner en práctica nuestros
-                            conocimientos de programación.
-                        </p>
-
-                        <a
-                            href="#games"
-                            class="hero-button"
-                            onclick="scrollToGames()"
-                        >
-                            🎮 Ver juegos
-                        </a>
-
+                    <div class="icono-principal">
+                        🎮
                     </div>
 
+                    <h3>
+                        Code Power
+                    </h3>
 
-                    <div class="hero-card">
-
-                        <div class="big-icon">
-                            🎮
-                        </div>
-
-                        <h2>
-                            Zona de juegos
-                        </h2>
-
-                        <p>
-                            Elige un juego y demuestra tus habilidades.
-                        </p>
-
-                    </div>
+                    <p>
+                        Zona Gamer
+                    </p>
 
                 </div>
 
-
-
-                <!-- =================================================
-                     JUEGOS
-                ================================================== -->
-
-                <div
-                    id="games"
-                    class="games-section"
-                >
-
-                    <div class="section-title">
-
-                        <h2>
-                            Nuestros juegos
-                        </h2>
-
-                        <p>
-                            Escoge uno y comienza a jugar
-                        </p>
-
-                    </div>
-
-
-                    <div class="games-grid">
-
-
-                        <!-- AHORCADO -->
-
-                        <div class="game-card">
-
-                            <div class="game-icon">
-                                🔤
-                            </div>
-
-                            <h3>
-                                Ahorcado
-                            </h3>
-
-                            <p>
-                                Descubre la palabra secreta
-                                antes de quedarte sin intentos.
-                            </p>
-
-                            <button
-                                class="game-button"
-                                onclick="openGame('hangman')"
-                            >
-                                Jugar
-                            </button>
-
-                        </div>
-
-
-
-                        <!-- ADIVINA EL NÚMERO -->
-
-                        <div class="game-card">
-
-                            <div class="game-icon">
-                                🔢
-                            </div>
-
-                            <h3>
-                                Adivina el número
-                            </h3>
-
-                            <p>
-                                Intenta descubrir el número
-                                secreto entre 1 y 100.
-                            </p>
-
-                            <button
-                                class="game-button"
-                                onclick="openGame('number')"
-                            >
-                                Jugar
-                            </button>
-
-                        </div>
-
-
-
-                        <!-- TIC TAC TOE -->
-
-                        <div class="game-card">
-
-                            <div class="game-icon">
-                                ❌
-                            </div>
-
-                            <h3>
-                                Tic Tac Toe
-                            </h3>
-
-                            <p>
-                                Juega con otra persona y consigue
-                                tres símbolos en línea.
-                            </p>
-
-                            <button
-                                class="game-button"
-                                onclick="openGame('tic')"
-                            >
-                                Jugar
-                            </button>
-
-                        </div>
-
-
-
-                        <!-- MEMORIA -->
-
-                        <div class="game-card">
-
-                            <div class="game-icon">
-                                🧠
-                            </div>
-
-                            <h3>
-                                Memoria
-                            </h3>
-
-                            <p>
-                                Encuentra todas las parejas
-                                de cartas.
-                            </p>
-
-                            <button
-                                class="game-button"
-                                onclick="openGame('memory')"
-                            >
-                                Jugar
-                            </button>
-
-                        </div>
-
-
-
-                        <!-- BUSCAMINAS -->
-
-                        <div class="game-card">
-
-                            <div class="game-icon">
-                                💣
-                            </div>
-
-                            <h3>
-                                Buscaminas
-                            </h3>
-
-                            <p>
-                                Descubre las casillas evitando
-                                las minas escondidas.
-                            </p>
-
-                            <button
-                                class="game-button"
-                                onclick="openGame('mines')"
-                            >
-                                Jugar
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </main>
+            </div>
 
         </section>
 
 
+        <!-- =========================
+             PROYECTO
+        ========================== -->
 
-        <!-- =================================================
-             SECCIÓN ACERCA DE
-        ================================================== -->
+        <section id="proyecto" class="proyecto">
 
-        <section
-            id="aboutSection"
-            class="about-section hidden"
-        >
+            <p class="subtitulo">
+                SOBRE NUESTRO PROYECTO
+            </p>
 
-            <main>
+            <h2>
+                ¿Por qué creamos Code Power?
+            </h2>
 
-                <div class="section-title">
 
-                    <h2>
-                        📚 Acerca de nuestro proyecto
-                    </h2>
+            <div class="proyecto-contenido">
+
+                <div class="texto-proyecto">
 
                     <p>
-                        Conoce un poco más sobre Code Power
+                        Creamos Code Power con el objetivo de
+                        aplicar nuestros conocimientos de
+                        programación de una forma práctica
+                        y divertida.
+                    </p>
+
+                    <p>
+                        Elegimos desarrollar juegos porque
+                        queremos demostrar que la programación
+                        también puede ser entretenida y fácil
+                        de aprender.
+                    </p>
+
+                    <p>
+                        En nuestro proyecto utilizamos
+                        <strong>HTML, CSS y JavaScript</strong>
+                        para crear la página y desarrollar
+                        nuestros juegos.
                     </p>
 
                 </div>
 
 
-                <div class="about-box">
+                <div class="tecnologias">
 
-                    <h2>
-                        ¿Qué es Code Power?
-                    </h2>
+                    <div class="tecnologia">
+                        <span>🌐</span>
+                        <h3>HTML</h3>
+                        <p>Estructura</p>
+                    </div>
 
-                    <p>
-                        Code Power es un proyecto escolar
-                        desarrollado para practicar programación
-                        mediante diferentes juegos interactivos.
-                    </p>
+                    <div class="tecnologia">
+                        <span>🎨</span>
+                        <h3>CSS</h3>
+                        <p>Diseño</p>
+                    </div>
 
-                </div>
-
-
-                <div class="about-box">
-
-                    <h3>
-                        🎯 Objetivo
-                    </h3>
-
-                    <p>
-                        Crear una página web sencilla donde los
-                        usuarios puedan divertirse mientras se
-                        ponen en práctica conceptos de HTML,
-                        CSS y JavaScript.
-                    </p>
+                    <div class="tecnologia">
+                        <span>⚙️</span>
+                        <h3>JavaScript</h3>
+                        <p>Interactividad</p>
+                    </div>
 
                 </div>
 
-
-                <div class="about-box">
-
-                    <h3>
-                        💻 Tecnologías utilizadas
-                    </h3>
-
-                    <ul>
-                        <li>HTML para la estructura.</li>
-                        <li>CSS para el diseño.</li>
-                        <li>JavaScript para la programación.</li>
-                    </ul>
-
-                </div>
-
-
-                <div class="about-box">
-
-                    <h3>
-                        🎮 Juegos incluidos
-                    </h3>
-
-                    <ul>
-                        <li>Ahorcado.</li>
-                        <li>Adivina el número.</li>
-                        <li>Tic Tac Toe.</li>
-                        <li>Memoria.</li>
-                        <li>Buscaminas.</li>
-                    </ul>
-
-                </div>
-
-            </main>
+            </div>
 
         </section>
 
 
+        <!-- =========================
+             JUEGOS
+        ========================== -->
 
-        <!-- =================================================
-             PIE DE PÁGINA
-        ================================================== -->
+        <section id="juegos" class="juegos">
 
-        <footer>
-
-            <p>
-                © 2026 Code Power | Proyecto escolar
+            <p class="subtitulo">
+                NUESTRA ZONA GAMER
             </p>
 
-            <p>
-                HTML • CSS • JavaScript
+            <h2>
+                Elige tu juego
+            </h2>
+
+            <p class="texto-centro">
+                Selecciona uno de nuestros juegos para comenzar.
             </p>
 
-        </footer>
 
-    </div>
-
+            <div class="juegos-contenedor">
 
 
-    <!-- =====================================================
-         MODAL PARA LOS JUEGOS
-    ====================================================== -->
+                <!-- MEMORIA -->
 
-    <div
-        id="gameModal"
-        class="modal hidden"
-    >
+                <article class="juego-card">
 
-        <div class="modal-content">
+                    <div class="juego-icono">
+                        🧠
+                    </div>
 
-            <button
-                class="close-modal"
-                onclick="closeGame()"
-                aria-label="Cerrar juego"
+                    <h3>
+                        Memoria
+                    </h3>
+
+                    <p>
+                        Encuentra todas las parejas de cartas
+                        iguales y demuestra tu memoria.
+                    </p>
+
+                    <a
+                        href="juegos/memoria.html"
+                        class="boton-juego"
+                    >
+                        Jugar ahora →
+                    </a>
+
+                </article>
+
+
+                <!-- BUSCAMINAS -->
+
+                <article class="juego-card">
+
+                    <div class="juego-icono">
+                        💣
+                    </div>
+
+                    <h3>
+                        Buscaminas
+                    </h3>
+
+                    <p>
+                        Encuentra las casillas seguras y evita
+                        las minas escondidas.
+                    </p>
+
+                    <a
+                        href="juegos/buscaminas.html"
+                        class="boton-juego"
+                    >
+                        Jugar ahora →
+                    </a>
+
+                </article>
+
+
+                <!-- ADIVINA EL NÚMERO -->
+
+                <article class="juego-card">
+
+                    <div class="juego-icono">
+                        🔢
+                    </div>
+
+                    <h3>
+                        Adivina el número
+                    </h3>
+
+                    <p>
+                        Intenta descubrir el número secreto
+                        usando tu lógica.
+                    </p>
+
+                    <a
+                        href="juegos/adivina.html"
+                        class="boton-juego"
+                    >
+                        Jugar ahora →
+                    </a>
+
+                </article>
+
+
+                <!-- TIC TAC TOE -->
+
+                <article class="juego-card">
+
+                    <div class="juego-icono">
+                        ⭕
+                    </div>
+
+                    <h3>
+                        Tic Tac Toe
+                    </h3>
+
+                    <p>
+                        Consigue tres símbolos en línea
+                        antes que tu oponente.
+                    </p>
+
+                    <a
+                        href="juegos/tic-tac-toe.html"
+                        class="boton-juego"
+                    >
+                        Jugar ahora →
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             EQUIPO
+        ========================== -->
+
+        <section id="equipo" class="equipo">
+
+            <p class="subtitulo">
+                NUESTRO EQUIPO
+            </p>
+
+            <h2>
+                Conoce a nuestro equipo
+            </h2>
+
+
+            <div class="equipo-contenedor">
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Keyla Miranda
+                    </h3>
+
+                    <p>
+                        Organización y solución de problemas
+                    </p>
+
+                </div>
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Lauren Oliveros
+                    </h3>
+
+                    <p>
+                        Diseño
+                    </p>
+
+                </div>
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Yaniris Durán
+                    </h3>
+
+                    <p>
+                        Organización
+                    </p>
+
+                </div>
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Daniela Murillo
+                    </h3>
+
+                    <p>
+                        Ideas
+                    </p>
+
+                </div>
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Taliani Ortiz
+                    </h3>
+
+                    <p>
+                        Programación
+                    </p>
+
+                </div>
+
+
+                <div class="integrante">
+
+                    <div class="persona">
+                        👩🏻‍💻
+                    </div>
+
+                    <h3>
+                        Sofia Montes
+                    </h3>
+
+                    <p>
+                        Planeación
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTACTO
+        ========================== -->
+
+        <section class="contacto">
+
+            <h2>
+                ¿Tienes alguna pregunta?
+            </h2>
+
+            <p>
+                Puedes comunicarte con nuestro equipo.
+            </p>
+
+            <a
+                href="mailto:keylamirandasena690@gmail.com"
+                class="correo"
             >
-                ×
-            </button>
+                📧 keylamirandasena690@gmail.com
+            </a>
 
-            <div id="gameContent"></div>
+        </section>
 
-        </div>
-
-    </div>
+    </main>
 
 
+    <!-- =========================
+         PIE DE PÁGINA
+    ========================== -->
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+    <footer>
+
+        <p>
+            🎮 Code Power | Proyecto SENA
+        </p>
+
+        <p>
+            HTML • CSS • JavaScript
+        </p>
+
+    </footer>
+
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
