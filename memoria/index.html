@@ -5,124 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Code Power | Memoria</title>
+    <title>Memoria | Code Power</title>
 
-    <link rel="stylesheet" href="memoria.css">
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-    <!-- ENCABEZADO -->
-    <header class="encabezado">
+    <main class="contenedor">
 
-        <div class="logo">
-            <span>💻</span>
-            <h1>Code Power</h1>
-        </div>
-
-        <a href="../index.html" class="volver">
-            ← Volver
+        <a href="../../index.html" class="volver">
+            ← Volver al inicio
         </a>
 
-    </header>
+        <h1>🧠 Cartas de Memoria</h1>
 
+        <p>
+            Encuentra todas las parejas de cartas iguales.
+        </p>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main>
-
-        <section class="juego">
-
-            <div class="titulo">
-
-                <span class="icono">🧠</span>
-
-                <h2>Juego de Memoria</h2>
-
-                <p>
-                    Encuentra todas las parejas de cartas iguales.
-                </p>
-
-            </div>
-
-
-            <!-- INFORMACIÓN DEL JUEGO -->
-            <div class="informacion">
-
-                <div class="dato">
-                    <span>🔄</span>
-                    <p>Movimientos</p>
-                    <strong id="movimientos">0</strong>
-                </div>
-
-                <div class="dato">
-                    <span>⭐</span>
-                    <p>Parejas</p>
-                    <strong id="parejas">0 / 8</strong>
-                </div>
-
-                <div class="dato">
-                    <span>⏱️</span>
-                    <p>Tiempo</p>
-                    <strong id="tiempo">0 s</strong>
-                </div>
-
-            </div>
-
-
-            <!-- TABLERO -->
-            <div id="tablero" class="tablero"></div>
-
-
-            <!-- BOTÓN REINICIAR -->
-            <button id="reiniciar" class="boton">
-                🔄 Reiniciar juego
-            </button>
-
-        </section>
-
-
-        <!-- MENSAJE DE VICTORIA -->
-        <div id="mensajeVictoria" class="mensaje-oculto">
-
-            <div class="victoria">
-
-                <div class="trofeo">
-                    🏆
-                </div>
-
-                <h2>¡Felicidades!</h2>
-
-                <p>
-                    Encontraste todas las parejas.
-                </p>
-
-                <p id="resultado"></p>
-
-                <button id="jugarOtraVez" class="boton">
-                    🎮 Jugar otra vez
-                </button>
-
-            </div>
-
+        <div class="informacion">
+            <span>Movimientos: <strong id="movimientos">0</strong></span>
+            <button id="reiniciar">Reiniciar</button>
         </div>
+
+        <div id="tablero" class="tablero"></div>
+
+        <p id="mensaje" class="mensaje"></p>
 
     </main>
 
-
-    <footer>
-
-        <p>
-            🎮 Code Power | Juego de Memoria
-        </p>
-
-        <p>
-            Proyecto SENA 💜
-        </p>
-
-    </footer>
-
-
-    <script src="memoria.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
