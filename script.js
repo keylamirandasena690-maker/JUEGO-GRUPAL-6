@@ -1436,202 +1436,107 @@ document.addEventListener(
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // CAPAS DE NAVEGACIÓN ARCADE
-    const navBtns = document.querySelectorAll(".nav-btn");
-    const vistasConsola = document.querySelectorAll(".seccion-consola");
-    const contenedorConsola = document.getElementById("contenedor-consola");
-    const contenedorArcadePantalla = document.getElementById("contenedor-arcade-pantalla");
-    const btnSalirArcade = document.getElementById("btn-salir-arcade");
-    const modulosJuego = document.querySelectorAll(".modulo-juego");
+const entradaNumero = document.getElementById("numero");
+const botonComprobar = document.getElementById("comprobar");
+const botonReiniciar = document.getElementById("reiniciar");
+const mensaje = document.getElementById("mensaje");
+const intentosTexto = document.getElementById("intentos"); 
 
-    // FILTROS EDAD RECREATIVOS
-    const btnSetNinos = document.getElementById("set-ninos");
-    const btnSetJovenes = document.getElementById("set-jovenes");
-    let modoEdad = "ninos"; // Inicia en Modo Infantil por defecto
+let numeroSecreto;
+let intentos;
+let juegoTerminado;
+let modoActual = "jovenes"; // Por defecto
+let rangoMaximo = 100;
 
-    // MARCADORES OVERLAY
-    const feedbackPantalla = document.getElementById("feedback-pantalla");
-    const feedbackTitulo = document.getElementById("feedback-titulo");
-    const feedbackSub = document.getElementById("feedback-sub");
-    const btnCerrarFeedback = document.getElementById("btn-cerrar-feedback");
+// Detectar el modo desde la ventana principal (si aplica) o crear botones dinámicos en la barra
+function inicializarEstiloModo() {
+const h1 = document.querySelector("h1");
+const pDesc = document.querySelector("main p");
+// Crear botones de cambio rápido si no existen
+if (!document.getElementById("cambio-modo-juego")) {
+    const contenedorModos = document.createElement("div");
+    contenedorModos.id = "cambio-modo-juego";
+    contenedorModos.style.margin = "15px 0";
+    contenedorModos.innerHTML = `
+    `;
+    h1.insertAdjacentElement('afterend', contenedorModos);
 
-    // DISPARADORES PANTALLA COMPLETA
-    document.querySelectorAll(".btn-lanzar").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const juegoDestino = this.getAttribute("data-juego");
-            contenedorConsola.classList.add("oculto");
-            contenedorArcadePantalla.classList.remove("oculto");
-            
-            modulosJuego.forEach(mod => mod.classList.add("oculto"));
-            document.getElementById(juegoDestino).classList.remove("oculto");
+    document.getElementById("btn-kids").addEventListener("click", () => cambiarModo("ninos"));
+    document.getElementById("btn-teens").addEventListener("click", () => cambiarModo("jovenes"));
+}
 
-            arrancarLogicaJuego(juegoDestino);
-        });
-    });
+if (modoActual === "ninos") {
+    document.body.style.background = "linear-gradient(135deg, #fff9e6, #ffe6a7)";
+    h1.textContent = "✨ ¡Adivina el Número Mágico! ✨";
+    pDesc.textContent = "¡Intenta descubrir el número secreto del 1 al 10!";
+    rangoMaximo = 10;
+} else {
+    document.body.style.background = "linear-gradient(135deg, #120c1f, #1d152e)";
+    document.body.style.color = "#e0dbec";
+    h1.textContent = "🚀 Algoritmo: Adivina el Número";
+    pDesc.textContent = "Descifra el valor numérico aleatorio entre 1 y 100.";
+    rangoMaximo = 100;
+}
+iniciarJuego();
 
-    btnSalirArcade.addEventListener("click", function() {
-        contenedorArcadePantalla.classList.add("oculto");
-        contenedorConsola.classList.remove("oculto");
-        detenerTodosLosCronometros();
-    });
+}
 
-    // Control de pestañas de navegación del menú principal
-    navBtns.forEach(btn => {
-        btn.addEventListener("click", function() {
-            navBtns.forEach(b => b.classList.remove("activo"));
-            this.classList.add("activo");
-            vistasConsola.forEach(v => v.classList.add("oculto"));
-            document.getElementById(this.getAttribute("data-target")).classList.remove("oculto");
-        });
-    });
+function cambiarModo(nuevoModo) {
+modoActual = nuevoModo;
+inicializarEstiloModo();
+}
 
-    // Cambiar Edad Global (Fácil / Pro)
-    btnSetNinos.addEventListener("click", () => { cambiarEdadGlobal("ninos"); });
-    btnSetJovenes.addEventListener("click", () => { cambiarEdadGlobal("jovenes"); });
+function iniciarJuego() {
+numeroSecreto = Math.floor(Math.random() * rangoMaximo) + 1;
+intentos = 0;
+juegoTerminado = false;
+entradaNumero.value = "";
+entradaNumero.max = rangoMaximo;
+entradaNumero.placeholder = `Número del 1 al ${rangoMaximo}`;
+mensaje.textContent = "";
+intentosTexto.textContent = intentos;
+entradaNumero.disabled = false;
+botonComprobar.disabled = false;
+entradaNumero.focus();
 
-    function cambiarEdadGlobal(edad) {
-        modoEdad = edad;
-        if(edad === "ninos") {
-            btnSetNinos.classList.add("active");
-            btnSetJovenes.classList.remove("active");
-            document.body.classList.add("kids-theme");
-        } else {
-            btnSetJovenes.classList.add("active");
-            btnSetNinos.classList.remove("active");
-            document.body.classList.remove("kids-theme");
-        }
-        const moduloActivo = Array.from(modulosJuego).find(m => !m.classList.contains("oculto"));
-        if(moduloActivo) arrancarLogicaJuego(moduloActivo.id);
-    }
+}
 
-    function lanzarFeedback(titulo, sub, esExito) {
-        feedbackTitulo.textContent = titulo;
-        feedbackSub.textContent = sub;
-        feedbackPantalla.classList.remove("oculto");
-    }
-    btnCerrarFeedback.addEventListener("click", () => { feedbackPantalla.classList.add("oculto"); });
+function comprobarNumero() {
+if (juegoTerminado) return;
+const numero = Number(entradaNumero.value);
 
-    function arrancarLogicaJuego(id) {
-        if(id === "juego-ahorcado") iniciarAhorcado();
-        if(id === "juego-adivina") iniciarAdivina();
-        if(id === "juego-tictac") iniciarTicTacToe();
-        if(id === "juego-memoria") iniciarMemoria();
-        if(id === "juego-buscamina") iniciarBuscaminas();
-    }
+if (entradaNumero.value === "" || numero < 1 || numero > rangoMaximo) {
+    mensaje.textContent = `⚠️ Escribe un número válido del 1 al ${rangoMaximo}.`;
+    mensaje.style.color = "#ff7096";
+    return;
+}
 
-    function detenerTodosLosCronometros() {
-        clearInterval(minesIntervalo);
-    }
+intentos++;
+intentosTexto.textContent = intentos;
 
-    // ==========================================
-    // 🔤 JUEGO 1: AHORCADO GRÁFICO
-    // ==========================================
-    const palabrasKids = ["SOL", "LUNA", "GATO", "PERRO", "CASA", "PAPA"];
-    const palabrasTeens = ["ALGORITMO", "VARIABLES", "INTERNET", "PROGRAMA", "PROYECTO"];
-    let ahPalabra = "", ahLetras = [], ahIntentos = 6;
+if (numero === numeroSecreto) {
+    mensaje.textContent = modoActual === "ninos" ? "🎉 ¡Súper! ¡Lo lograste, encontraste el número!" : "🎉 ¡Correcto! Objetivo completado.";
+    mensaje.style.color = "#2a9d8f";
+    juegoTerminado = true;
+    entradaNumero.disabled = true;
+    botonComprobar.disabled = true;
+} else if (numero < numeroSecreto) {
+    mensaje.textContent = "⬆️ El número secreto es MÁS ALTO.";
+    mensaje.style.color = "#7b2cbf";
+} else {
+    mensaje.textContent = "⬇️ El número secreto es MÁS BAJO.";
+    mensaje.style.color = "#7b2cbf";
+}
 
-    function iniciarAhorcado() {
-        const banco = (modoEdad === "ninos") ? palabrasKids : palabrasTeens;
-        ahPalabra = banco[Math.floor(Math.random() * banco.length)];
-        ahLetras = [];
-        ahIntentos = (modoEdad === "ninos") ? 8 : 4;
-        
-        document.getElementById("ahorcado-intentos").textContent = ahIntentos;
-        document.querySelectorAll(".parte-a").forEach(p => p.classList.add("oculto"));
-        document.getElementById("a-base").classList.remove("oculto");
-        pintarPalabraAhorcado();
-        generarTecladoAhorcado();
-    }
+entradaNumero.focus();
+entradaNumero.select();
 
-    function pintarPalabraAhorcado() {
-        let display = "";
-        ahPalabra.split("").forEach(l => display += (ahLetras.includes(l) ? l : "_") + " ");
-        document.getElementById("ahorcado-palabra").textContent = display.trim();
-        if(!display.includes("_")) lanzarFeedback("🎉 ¡SÚPER JUGADOR!", "¡Lograste salvar al personaje adivinando la palabra!", true);
-    }
+}
 
-    function generarTecladoAhorcado() {
-        const caja = document.getElementById("ahorcado-teclado"); caja.innerHTML = "";
-        "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("").forEach(l => {
-            const b = document.createElement("button"); b.textContent = l;
-            b.addEventListener("click", () => { b.disabled = true; jugarLetraAh(l); });
-            caja.appendChild(b);
-        });
-    }
+botonComprobar.addEventListener("click", comprobarNumero);
+entradaNumero.addEventListener("keydown", (e) => { if (e.key === "Enter") comprobarNumero(); });
+botonReiniciar.addEventListener("click", iniciarJuego);
 
-    function jugarLetraAh(l) {
-        if(ahPalabra.includes(l)) { ahLetras.push(l); pintarPalabraAhorcado(); }
-        else {
-            ahIntentos--; document.getElementById("ahorcado-intentos").textContent = ahIntentos;
-            if(ahIntentos === 5) document.getElementById("a-soga").classList.remove("oculto");
-            if(ahIntentos === 3) document.getElementById("a-cabeza").classList.remove("oculto");
-            if(ahIntentos === 2) document.getElementById("a-cuerpo").classList.remove("oculto");
-            if(ahIntentos === 1) document.getElementById("a-brazos").classList.remove("oculto");
-            if(ahIntentos <= 0) {
-                document.getElementById("a-piernas").classList.remove("oculto");
-                lanzarFeedback("💥 ¡FIN DEL INTENTO!", "La palabra correcta era: " + ahPalabra, false);
-            }
-        }
-    }
-    document.getElementById("reiniciar-ahorcado").addEventListener("click", iniciarAhorcado);
+inicializarEstiloModo();
 
-    // ==========================================
-    // 🔢 JUEGO 2: ADIVINA EL NÚMERO
-    // ==========================================
-    let adNumSecreto, adIntentos, adMax;
-    function iniciarAdivina() {
-        adMax = (modoEdad === "ninos") ? 10 : 100;
-        adNumSecreto = Math.floor(Math.random() * adMax) + 1;
-        adIntentos = 0;
-        document.getElementById("adivina-intentos").textContent = adIntentos;
-        document.getElementById("adivina-input").value = "";
-        
-        const btnAyuda = document.getElementById("btn-revelar-magico");
-        if(modoEdad === "ninos") {
-            btnAyuda.classList.remove("oculto");
-            document.getElementById("pista-caja").textContent = `✨ Pista Mágica: Piensa un número del 1 al 10. ¡Es muy fácil!`;
-        } else {
-            btnAyuda.classList.add("oculto");
-            let pista = `Analizando datos: El número aleatorio se encuentra entre 1 y 100. `;
-            pista += (adNumSecreto % 2 === 0) ? "💡 Reporte: Es un número PAR." : "💡 Reporte: Es un número IMPAR.";
-            document.getElementById("pista-caja").textContent = pista;
-        }
-    }
-
-    document.getElementById("adivina-btn-comprobar").addEventListener("click", function() {
-        const val = Number(document.getElementById("adivina-input").value);
-        if(!val || val < 1 || val > adMax) return;
-        adIntentos++; document.getElementById("adivina-intentos").textContent = adIntentos;
-        
-        if(val === adNumSecreto) {
-            lanzarFeedback("🎉 ¡FANTÁSTICO!", `¡Adivinaste en solo ${adIntentos} intentos!`, true);
-        } else {
-            if(modoEdad === "ninos") {
-                document.getElementById("pista-caja").textContent = (val < adNumSecreto) ? "🎈 ¡Prueba otra vez! El número mágico es MÁS GRANDE." : "🎈 ¡Prueba otra vez! El número mágico es MÁS PEQUEÑO.";
-            } else {
-                document.getElementById("pista-caja").textContent = (val < adNumSecreto) ? "⚙️ Rango Técnico: El número secreto es MAYOR que la propuesta." : "⚙️ Rango Técnico: El número secreto es MENOR que la propuesta.";
-            }
-        }
-    });
-
-    document.getElementById("btn-revelar-magico").addEventListener("click", function() {
-        document.getElementById("pista-caja").textContent = `🎁 ¡El número secreto es el ${adNumSecreto}! Escríbelo para ganar.`;
-    });
-    document.getElementById("reiniciar-adivina").addEventListener("click", iniciarAdivina);
-
-    // ==========================================
-    // ❌ JUEGO 3: TIC TAC TOE + IA
-    // ==========================================
-    let ttTablero = Array(9).fill(""), ttActivo = true, ttModo = "1p";
-    
-    function iniciarTicTacToe() {
-        ttTablero.fill(""); ttActivo = true;
-        document.querySelectorAll(".tictac-celda").forEach(c => c.textContent = "");
-    }
-
-    document.getElementById("tictac-1p").addEventListener("click", function() { ttModo = "1p"; this.classList.add("active"); document.getElementById("tictac-2p").classList.remove("active"); iniciarTicTacToe(); });
-    document.getElementById("tictac-2p").addEventListener("click", function() { ttModo = "2p"; this.classList.add("active"); document.getElementById("tictac-1p").classList.remove("active"); iniciarTicTacToe(); });
-    
-    document.querySelectorAll(".tictac-celda").forEach(celda => {
-        celda.addEventListener("click", function() {const idx = this.getAttribute("data-idx");if(ttTablero[idx] !== "" || !ttActivo) return;ejecutarMovimientoTT(idx, "X");if(ttActivo && ttModo === "1p") setTimeout(movimientoIA, 250);});});function ejecutarMovimientoTT(idx, jugador) {ttTablero[idx] = jugador;const cElement = document.querySelector([data-idx='${idx}']);cElement.textContent = jugador;cElement.style.color = (jugador === "X") ? "#4cc9f0" : "#f72585";comprobarEstadoTT();}function movimientoIA() {let vacias = [];ttTablero.forEach((c, i) => { if(c === "") vacias.push(i); });if(vacias.length > 0 && ttActivo) {let seleccionada;if(modoEdad === "jovenes") {const combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(let combo of combos) {let piezasX = combo.filter(i => ttTablero[i] === "X").length;let piezasVacias = combo.filter(i => ttTablero[i] === "").length;if(piezasX === 2 && piezasVacias === 1) {seleccionada = combo.find(i => ttTablero[i] === "");break;}}}if(seleccionada === undefined) {seleccionada = vacias[Math.floor(Math.random() * vacias.length)];}ejecutarMovimientoTT(seleccionada, "O");}}function comprobarEstadoTT() {const combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(let combo of combos) {if(ttTablero[combo[0]] && ttTablero[combo[0]] === ttTablero[combo[1]] && ttTablero[combo[0]] === ttTablero[combo[2]]) {ttActivo = false;lanzarFeedback(ttTablero[combo[0]] === "X" ? "🎉 ¡VICTORIA TOTAL!" : "💥 ¡Computadora Ganó!", "Tres símbolos alineados en línea recta.", ttTablero[combo[0]] === "X");return;}}if(!ttTablero.includes("")) { ttActivo = false; lanzarFeedback("⚖️ ¡EMPATE!", "El tablero se completó de forma equitativa.", true); }}document.getElementById("reiniciar-tictac").addEventListener("click", iniciarTicTacToe);// ==========================================// 🧠 JUEGO 4: MEMORIA GIGANTE 3D// ==========================================let memCartas = [], memAbiertas = [], memMovs = 0, memParejas = 0;function iniciarMemoria() {const poolKids = ["🐶", "🐱", "🦁"];const poolTeens = ["🍎", "🍌", "🍇", "🍉", "🍓", "🍒", "🥝", "🍍"];const pool = (modoEdad === "ninos") ? poolKids : poolTeens;memCartas = [...pool, ...pool].sort(() => Math.random() - 0.5);memMovs = 0; memParejas = 0; memAbiertas = [];document.getElementById("memoria-movimientos").textContent = memMovs;const grid = document.getElementById("memoria-tablero"); grid.innerHTML = "";grid.style.gridTemplateColumns = (modoEdad === "ninos") ? "repeat(3, 1fr)" : "repeat(4, 1fr)";grid.style.maxWidth = (modoEdad === "ninos") ? "450px" : "600px";memCartas.forEach((sym, idx) => {const c = document.createElement("div"); c.classList.add("m-carta"); c.dataset.sym = sym;c.addEventListener("click", voltearCartaMem);grid.appendChild(c);});}function voltearCartaMem() {if(memAbiertas.length >= 2 || this.classList.contains("flipped")) return;this.classList.add("flipped"); this.textContent = this.dataset.sym;memAbiertas.push(this);if(memAbiertas.length === 2) {memMovs++; document.getElementById("memoria-movimientos").textContent = memMovs;if(memAbiertas[0].dataset.sym === memAbiertas[1].dataset.sym) {memParejas++; memAbiertas = [];if(memParejas === memCartas.length / 2) lanzarFeedback("🎉 ¡FANTÁSTICO!", "¡Encontraste todas las parejas ocultas!", true);} else {setTimeout(() => {memAbiertas[0].classList.remove("flipped"); memAbiertas[0].textContent = "";memAbiertas[1].classList.remove("flipped"); memAbiertas[1].textContent = "";memAbiertas = [];}, 800);}}}document.getElementById("reiniciar-memoria").addEventListener("click", iniciarMemoria);// ==========================================// 💣 JUEGO 5: BUSCAMINAS CON CONTROL DE DAÑO// ==========================================let minesGrid = [], minesFallos = 0, minesTime = 0, minesIntervalo, minesDimension, totalBombs;let minesIntervaloLocal; // Para evitar conflictos localesfunction iniciarBuscaminas() {minesFallos = 0; minesTime = 0;document.getElementById("mines-fallos").textContent = minesFallos;document.getElementById("mines-time").textContent = minesTime;clearInterval(minesIntervaloLocal);minesIntervaloLocal = setInterval(() => { minesTime++; document.getElementById("mines-time").textContent = minesTime; }, 1000);minesDimension = (modoEdad === "ninos") ? 25 : 100;totalBombs = (modoEdad === "ninos") ? 2 : 15;const caja = document.getElementById("mines-tablero"); caja.innerHTML = "";caja.style.gridTemplateColumns = (modoEdad === "ninos") ? "repeat(5, 1fr)" : "repeat(10, 1fr)";caja.style.maxWidth = (modoEdad === "ninos") ? "350px" : "500px";minesGrid = Array(minesDimension).fill(false);let colocadas = 0;while(colocadas < totalBombs) {let r = Math.floor(Math.random() * minesDimension);if(!minesGrid[r]) { minesGrid[r] = true; colocadas++; }}minesGrid.forEach((tieneMina, idx) => {const celda = document.createElement("div"); celda.classList.add("m-celda");celda.addEventListener("click", function() {if(this.classList.contains("safe") || this.classList.contains("boom")) return;if(tieneMina) {this.classList.add("boom"); this.textContent = "💥";minesFallos++; document.getElementById("mines-fallos").textContent = minesFallos;} else {this.classList.add("safe"); this.textContent = "✔";}comprobarVictoriaMines();});caja.appendChild(celda);});}function comprobarVictoriaMines() {const descubiertas = document.querySelectorAll(".m-celda.safe").length;const segurasNecesarias = minesDimension - totalBombs;if(descubiertas === segurasNecesarias) {clearInterval(minesIntervaloLocal);lanzarFeedback("🎉 ¡CUPIDO LOGRADO!", ¡Limpiaste la zona con éxito! Fallos cometidos: ${minesFallos}, true);}}document.getElementById("reiniciar-buscamina").addEventListener("click", iniciarBuscaminas);// Forzar renderizado inicial en modo infantilcambiarEdadGlobal("ninos");});
+});
