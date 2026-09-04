@@ -1431,98 +1431,112 @@ document.addEventListener(
     }
 );
 
+
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // ELEMENTOS CONTROL DEL ACCESO
-    const pantallaLogin = document.getElementById("pantalla-login");
-    const contenidoPlataforma = document.getElementById("contenido-plataforma");
-    const formularioLogin = document.getElementById("formulario-login");
-    const inputUsuario = document.getElementById("usuario");
-    const inputContrasena = document.getElementById("contrasena");
-    const btnOjo = document.getElementById("ver-contrasena");
-    const btnSalir = document.getElementById("btn-salir");
+const entradaNumero = document.getElementById("numero");
+const botonComprobar = document.getElementById("comprobar");
+const botonReiniciar = document.getElementById("reiniciar");
+const mensaje = document.getElementById("mensaje");
+const intentosTexto = document.getElementById("intentos"); 
 
-    // ELEMENTOS DEL MENÚ DE NAVEGACIÓN
-    const enlacesNav = document.querySelectorAll(".nav-link:not(.salir)");
-    const vistas = document.querySelectorAll(".vista-seccion");
+let numeroSecreto;
+let intentos;
+let juegoTerminado;
+let modoActual = "jovenes"; // Por defecto
+let rangoMaximo = 100;
 
-    // ELEMENTOS DEL MODAL JUEGO AHORCADO
-    const modalAhorcado = document.getElementById("modal-ahorcado");
-    const btnAbrirAhorcado = document.getElementById("abrir-ahorcado");
-    const btnCerrarAhorcado = document.getElementById("cerrar-ahorcado");
-    const tecladoAhorcado = document.getElementById("teclado-ahorcado");
+// Detectar el modo desde la ventana principal (si aplica) o crear botones dinámicos en la barra
+function inicializarEstiloModo() {
+const h1 = document.querySelector("h1");
+const pDesc = document.querySelector("main p");
+// Crear botones de cambio rápido si no existen
+if (!document.getElementById("cambio-modo-juego")) {
+    const contenedorModos = document.createElement("div");
+    contenedorModos.id = "cambio-modo-juego";
+    contenedorModos.style.margin = "15px 0";
+    contenedorModos.innerHTML = `
+    `;
+    h1.insertAdjacentElement('afterend', contenedorModos);
 
-    // 1. Mostrar / Ocultar contraseña (Ojito)
-    btnOjo.addEventListener("click", function() {
-        if (inputContrasena.type === "password") {
-            inputContrasena.type = "text";
-            btnOjo.textContent = "🙈";
-        } else {
-            inputContrasena.type = "password";
-            btnOjo.textContent = "👁";
-        }
-    });
+    document.getElementById("btn-kids").addEventListener("click", () => cambiarModo("ninos"));
+    document.getElementById("btn-teens").addEventListener("click", () => cambiarModo("jovenes"));
+}
 
-    // 2. Control de Acceso (Login)
-    formularioLogin.addEventListener("submit", function() {
-        // Validación básica: permite ingresar con cualquier usuario y clave para pruebas
-        if (inputUsuario.value.trim() !== "" && inputContrasena.value.trim() !== "") {
-            pantallaLogin.classList.add("contenido-oculto");
-            contenidoPlataforma.classList.remove("contenido-oculto");
-        }
-    });
+if (modoActual === "ninos") {
+    document.body.style.background = "linear-gradient(135deg, #fff9e6, #ffe6a7)";
+    h1.textContent = "✨ ¡Adivina el Número Mágico! ✨";
+    pDesc.textContent = "¡Intenta descubrir el número secreto del 1 al 10!";
+    rangoMaximo = 10;
+} else {
+    document.body.style.background = "linear-gradient(135deg, #120c1f, #1d152e)";
+    document.body.style.color = "#e0dbec";
+    h1.textContent = "🚀 Algoritmo: Adivina el Número";
+    pDesc.textContent = "Descifra el valor numérico aleatorio entre 1 y 100.";
+    rangoMaximo = 100;
+}
+iniciarJuego();
 
-    // 3. Botón de Salir (Cerrar sesión)
-    btnSalir.addEventListener("click", function(e) {
-        e.preventDefault();
-        contenidoPlataforma.classList.add("contenido-oculto");
-        pantallaLogin.classList.remove("contenido-oculto");
-        formularioLogin.reset();
-    });
+}
 
-    // 4. Navegación por pestañas (Inicio vs Acerca de)
-    enlacesNav.forEach(enlace => {
-        enlace.addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            // Cambiar clase activa en el menú
-            enlacesNav.forEach(link => link.classList.remove("activo"));
-            this.classList.add("activo");
+function cambiarModo(nuevoModo) {
+modoActual = nuevoModo;
+inicializarEstiloModo();
+}
 
-            // Mostrar sección correspondiente
-            const seccionDestino = "seccion-" + this.getAttribute("data-seccion");
-            vistas.forEach(vista => {
-                if (vista.id === seccionDestino) {
-                    vista.classList.remove("contenido-oculto");
-                } else {
-                    vista.classList.add("contenido-oculto");
-                }
-            });
-        });
-    });
+function iniciarJuego() {
+numeroSecreto = Math.floor(Math.random() * rangoMaximo) + 1;
+intentos = 0;
+juegoTerminado = false;
+entradaNumero.value = "";
+entradaNumero.max = rangoMaximo;
+entradaNumero.placeholder = `Número del 1 al ${rangoMaximo}`;
+mensaje.textContent = "";
+intentosTexto.textContent = intentos;
+entradaNumero.disabled = false;
+botonComprobar.disabled = false;
+entradaNumero.focus();
 
-    // 5. Control de Ventana Modal (Abrir/Cerrar Ahorcado)
-    btnAbrirAhorcado.addEventListener("click", function() {
-        modalAhorcado.style.display = "flex";
-        inicializarTecladoAhorcado();
-    });
+}
 
-    btnCerrarAhorcado.addEventListener("click", function() {
-        modalAhorcado.style.display = "none";
-    });
+function comprobarNumero() {
+if (juegoTerminado) return;
+const numero = Number(entradaNumero.value);
 
-    // Generar las letras del abecedario dinámicamente para el Ahorcado
-    function inicializarTecladoAhorcado() {
-        tecladoAhorcado.innerHTML = "";
-        const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        
-        letras.forEach(letra => {
-            const botonLetra = document.createElement("button");
-            botonLetra.textContent = letra;
-            botonLetra.addEventListener("click", function() {
-                this.disabled = true; // Desactiva la letra al usarla
-            });
-            tecladoAhorcado.appendChild(botonLetra);
-        });
-    }
+if (entradaNumero.value === "" || numero < 1 || numero > rangoMaximo) {
+    mensaje.textContent = `⚠️ Escribe un número válido del 1 al ${rangoMaximo}.`;
+    mensaje.style.color = "#ff7096";
+    return;
+}
+
+intentos++;
+intentosTexto.textContent = intentos;
+
+if (numero === numeroSecreto) {
+    mensaje.textContent = modoActual === "ninos" ? "🎉 ¡Súper! ¡Lo lograste, encontraste el número!" : "🎉 ¡Correcto! Objetivo completado.";
+    mensaje.style.color = "#2a9d8f";
+    juegoTerminado = true;
+    entradaNumero.disabled = true;
+    botonComprobar.disabled = true;
+} else if (numero < numeroSecreto) {
+    mensaje.textContent = "⬆️ El número secreto es MÁS ALTO.";
+    mensaje.style.color = "#7b2cbf";
+} else {
+    mensaje.textContent = "⬇️ El número secreto es MÁS BAJO.";
+    mensaje.style.color = "#7b2cbf";
+}
+
+entradaNumero.focus();
+entradaNumero.select();
+
+}
+
+botonComprobar.addEventListener("click", comprobarNumero);
+entradaNumero.addEventListener("keydown", (e) => { if (e.key === "Enter") comprobarNumero(); });
+botonReiniciar.addEventListener("click", iniciarJuego);
+
+inicializarEstiloModo();
+
 });
