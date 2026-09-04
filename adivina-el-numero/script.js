@@ -1,93 +1,78 @@
-// Número secreto entre 1 y 100
-let numeroSecreto = Math.floor(Math.random() * 100) + 1;
-
-// Contador de intentos
-let cantidadIntentos = 0;
-
-// Elementos de la página
-const numero = document.getElementById("numero");
-const btnAdivinar = document.getElementById("btnAdivinar");
-const btnReiniciar = document.getElementById("btnReiniciar");
+const entradaNumero = document.getElementById("numero");
+const botonComprobar = document.getElementById("comprobar");
+const botonReiniciar = document.getElementById("reiniciar");
 const mensaje = document.getElementById("mensaje");
-const intentos = document.getElementById("intentos");
+const intentosTexto = document.getElementById("intentos"); 
 
-// Función para comprobar el número
-function adivinarNumero() {
+let numeroSecreto;
+let intentos;
+let juegoTerminado; 
 
-    const numeroUsuario = Number(numero.value);
+function iniciarJuego() {
+numeroSecreto = Math.floor(Math.random() * 100) + 1;
+intentos = 0;
+juegoTerminado = false; 
 
-    // Comprobar que el número sea válido
-    if (numeroUsuario < 1 || numeroUsuario > 100 || numero.value === "") {
-        mensaje.textContent = "⚠️ Escribe un número entre 1 y 100.";
-        return;
-    }
+entradaNumero.value = "";
+mensaje.textContent = "";
+mensaje.style.color = "#7b2cbf";
+intentosTexto.textContent = intentos;
+entradaNumero.disabled = false;
+botonComprobar.disabled = false;
 
-    cantidadIntentos++;
-    intentos.textContent = cantidadIntentos;
+entradaNumero.focus();
 
-    // Si el número es correcto
-    if (numeroUsuario === numeroSecreto) {
+} 
 
-        mensaje.textContent = 
-            "🎉 ¡Correcto! Adivinaste el número en " +
-            cantidadIntentos + " intento(s).";
+function comprobarNumero() {
+if (juegoTerminado) {
+return;
+} 
 
-        mensaje.classList.add("ganaste");
+const numero = Number(entradaNumero.value);
 
-        numero.disabled = true;
-        btnAdivinar.disabled = true;
-
-    } 
-    // Si el número es menor
-    else if (numeroUsuario < numeroSecreto) {
-
-        mensaje.textContent = "⬆️ El número secreto es mayor.";
-        mensaje.classList.remove("ganaste");
-
-    } 
-    // Si el número es mayor
-    else {
-
-        mensaje.textContent = "⬇️ El número secreto es menor.";
-        mensaje.classList.remove("ganaste");
-    }
-
-    numero.value = "";
-    numero.focus();
+if (entradaNumero.value === "" || numero < 1 || numero > 100) {
+mensaje.textContent = "⚠️ Escribe un número válido del 1 al 100.";
+mensaje.style.color = "#ff7096";
+entradaNumero.focus();
+return;
 }
 
-// Función para reiniciar el juego
-function reiniciarJuego() {
+intentos++;
+intentosTexto.textContent = intentos;
 
-    numeroSecreto = Math.floor(Math.random() * 100) + 1;
+if (numero === numeroSecreto) {
+mensaje.textContent = "🎉 ¡Correcto! Adivinaste el número secreto.";
+mensaje.style.color = "#2a9d8f";
+juegoTerminado = true;
+entradaNumero.disabled = true;
+botonComprobar.disabled = true;
+} else if (numero < numeroSecreto) {
+mensaje.textContent = "⬆️ El número secreto es mayor.";
+mensaje.style.color = "#7b2cbf";
+// CORREGIDO: Selecciona el texto para que pueda ver qué escribió y reescribir encima fácil
+entradaNumero.focus();
+entradaNumero.select();
 
-    cantidadIntentos = 0;
+} else {
+mensaje.textContent = "⬇️ El número secreto es menor.";
+mensaje.style.color = "#7b2cbf";
+// CORREGIDO: Selecciona el texto para mantener la usabilidad impecable
+entradaNumero.focus();
+entradaNumero.select();
 
-    intentos.textContent = "0";
-
-    mensaje.textContent = 
-        "¡Escribe un número para comenzar!";
-
-    mensaje.classList.remove("ganaste");
-
-    numero.disabled = false;
-    btnAdivinar.disabled = false;
-
-    numero.value = "";
-    numero.focus();
 }
 
-// Botón para adivinar
-btnAdivinar.addEventListener("click", adivinarNumero);
+} 
 
-// Permitir usar la tecla Enter
-numero.addEventListener("keydown", function(event) {
+botonComprobar.addEventListener("click", comprobarNumero); 
 
-    if (event.key === "Enter") {
-        adivinarNumero();
-    }
+entradaNumero.addEventListener("keydown", function(evento) {
+if (evento.key === "Enter") {
+comprobarNumero();
+}
+}); 
 
-});
+botonReiniciar.addEventListener("click", iniciarJuego); 
 
-// Botón para reiniciar
-btnReiniciar.addEventListener("click", reiniciarJuego);
+iniciarJuego();
