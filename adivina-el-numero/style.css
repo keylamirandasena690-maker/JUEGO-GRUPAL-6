@@ -1,73 +1,63 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+const entradaNumero = document.getElementById("numero");
+const botonComprobar = document.getElementById("comprobar");
+const botonReiniciar = document.getElementById("reiniciar");
+const mensaje = document.getElementById("mensaje");
+const intentosTexto = document.getElementById("intentos");
+
+let numeroSecreto;
+let intentos;
+let juegoTerminado;
+
+function iniciarJuego() {
+    numeroSecreto = Math.floor(Math.random() * 100) + 1;
+    intentos = 0;
+    juegoTerminado = false;
+
+    entradaNumero.value = "";
+    mensaje.textContent = "";
+    intentosTexto.textContent = intentos;
+    entradaNumero.disabled = false;
+    botonComprobar.disabled = false;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f4e8ff, #e1f4ff);
-    color: #352642;
-    text-align: center;
-    padding: 25px;
+function comprobarNumero() {
+    if (juegoTerminado) {
+        return;
+    }
+
+    const numero = Number(entradaNumero.value);
+
+    if (numero < 1 || numero > 100 || entradaNumero.value === "") {
+        mensaje.textContent = "Escribe un número válido del 1 al 100.";
+        return;
+    }
+
+    intentos++;
+    intentosTexto.textContent = intentos;
+
+    if (numero === numeroSecreto) {
+        mensaje.textContent =
+            "🎉 ¡Correcto! Adivinaste el número secreto.";
+        juegoTerminado = true;
+        entradaNumero.disabled = true;
+        botonComprobar.disabled = true;
+    } else if (numero < numeroSecreto) {
+        mensaje.textContent = "⬆️ El número secreto es mayor.";
+    } else {
+        mensaje.textContent = "⬇️ El número secreto es menor.";
+    }
+
+    entradaNumero.value = "";
 }
 
-.contenedor {
-    max-width: 550px;
-    margin: auto;
-    background: white;
-    padding: 40px 25px;
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(100, 70, 130, 0.15);
-}
+botonComprobar.addEventListener("click", comprobarNumero);
 
-.volver {
-    display: inline-block;
-    margin-bottom: 25px;
-    color: #7b2cbf;
-    text-decoration: none;
-    font-weight: bold;
-}
+entradaNumero.addEventListener("keydown", function(evento) {
+    if (evento.key === "Enter") {
+        comprobarNumero();
+    }
+});
 
-h1 {
-    color: #7b2cbf;
-    margin-bottom: 15px;
-}
+botonReiniciar.addEventListener("click", iniciarJuego);
 
-p {
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-input {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #c77dff;
-    border-radius: 10px;
-    margin: 15px 0;
-    font-size: 18px;
-    text-align: center;
-}
-
-button {
-    border: none;
-    background: #9d4edd;
-    color: white;
-    padding: 13px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 8px;
-}
-
-button:hover {
-    background: #7b2cbf;
-}
-
-.mensaje {
-    color: #7b2cbf;
-    font-size: 20px;
-    font-weight: bold;
-    min-height: 35px;
-}
+iniciarJuego();
