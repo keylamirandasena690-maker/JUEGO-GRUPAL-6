@@ -1,521 +1,103 @@
-/* ================================
-   CONFIGURACIÓN GENERAL
-================================ */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f8edff,
-            #eef6ff
-        );
-
-    color: #30263d;
-
     min-height: 100vh;
+    background: linear-gradient(135deg, #f4e8ff, #e3f2ff);
+    color: #352642;
+    text-align: center;
+    padding: 25px;
 }
 
-
-/* ================================
-   ENCABEZADO
-================================ */
-
-.encabezado {
-    width: 100%;
-
-    padding: 18px 8%;
-
-    background: white;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    box-shadow:
-        0 3px 12px
-        rgba(100, 70, 130, 0.12);
+.contenedor {
+    max-width: 700px;
+    margin: auto;
 }
-
-
-/* LOGO */
-
-.logo {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-.logo span {
-    font-size: 28px;
-}
-
-.logo h1 {
-    color: #8d5bb5;
-
-    font-size: 25px;
-}
-
-
-/* BOTÓN VOLVER */
 
 .volver {
-    text-decoration: none;
-
-    color: #8d5bb5;
-
-    border: 2px solid #cda9df;
-
-    padding: 10px 18px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-.volver:hover {
-    background: #a66bc4;
-
-    color: white;
-}
-
-
-/* ================================
-   JUEGO
-================================ */
-
-.juego {
-    width: 90%;
-
-    max-width: 900px;
-
-    margin: 45px auto;
-
-    text-align: center;
-}
-
-
-/* TÍTULO */
-
-.titulo {
+    display: inline-block;
     margin-bottom: 25px;
+    color: #7b2cbf;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.icono {
-    font-size: 55px;
+h1 {
+    color: #7b2cbf;
+    margin-bottom: 12px;
 }
-
-.titulo h2 {
-    font-size: 38px;
-
-    color: #8d5bb5;
-
-    margin: 10px 0;
-}
-
-.titulo p {
-    color: #6d6374;
-
-    font-size: 17px;
-}
-
-
-/* ================================
-   INFORMACIÓN
-================================ */
 
 .informacion {
-
     display: flex;
-
     justify-content: center;
-
-    gap: 20px;
-
-    margin: 30px auto;
-
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+    margin: 25px 0;
 }
 
-.dato {
-
-    background: white;
-
-    width: 160px;
-
-    padding: 15px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px
-        rgba(100, 70, 130, 0.10);
+button {
+    border: none;
+    background: #9d4edd;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.dato span {
-    font-size: 25px;
+button:hover {
+    background: #7b2cbf;
 }
-
-.dato p {
-
-    color: #746a7d;
-
-    font-size: 14px;
-
-    margin: 5px 0;
-}
-
-.dato strong {
-
-    color: #8d5bb5;
-
-    font-size: 20px;
-}
-
-
-/* ================================
-   TABLERO
-================================ */
 
 .tablero {
-
-    width: 100%;
-
-    max-width: 650px;
-
-    margin: 30px auto;
-
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 500px;
+    margin: auto;
 }
-
-
-/* ================================
-   CARTAS
-================================ */
 
 .carta {
-
-    height: 135px;
-
-    perspective: 1000px;
-
-    cursor: pointer;
-}
-
-
-.carta-contenido {
-
-    width: 100%;
-
-    height: 100%;
-
-    position: relative;
-
-    transition:
-        transform 0.5s;
-
-    transform-style: preserve-3d;
-}
-
-
-.carta.volteada .carta-contenido {
-
-    transform: rotateY(180deg);
-}
-
-
-.carta.frente,
-.carta.atras {
-
-    position: absolute;
-
-    width: 100%;
-
-    height: 100%;
-
-    backface-visibility: hidden;
-
+    height: 110px;
+    background: #9d4edd;
     border-radius: 15px;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    box-shadow:
-        0 5px 15px
-        rgba(100, 70, 130, 0.15);
-}
-
-
-/* PARTE TRASERA */
-
-.carta.atras {
-
-    background:
-        linear-gradient(
-            135deg,
-            #a66bc4,
-            #7f9ddd
-        );
-
-    color: white;
-
     font-size: 40px;
-
-    border: 3px solid white;
-}
-
-
-/* PARTE FRONTAL */
-
-.carta.frente {
-
-    background: white;
-
-    transform: rotateY(180deg);
-
-    font-size: 45px;
-
-    border: 3px solid #dfc7ec;
-}
-
-
-/* CARTA ENCONTRADA */
-
-.carta.encontrada .carta-frente {
-
-    background: #e8f7ee;
-
-    border-color: #92d2aa;
-}
-
-
-/* ================================
-   BOTÓN
-================================ */
-
-.boton {
-
-    border: none;
-
-    background: #a66bc4;
-
-    color: white;
-
-    padding: 13px 25px;
-
-    border-radius: 12px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
     cursor: pointer;
-
+    color: transparent;
     transition: 0.3s;
 }
 
-.boton:hover {
-
-    background: #8f54ad;
-
-    transform: translateY(-2px);
-}
-
-
-/* ================================
-   MENSAJE DE VICTORIA
-================================ */
-
-.mensaje-oculto {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(48, 38, 61, 0.55);
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 20px;
-
-    z-index: 200;
-}
-
-
-.mensaje-oculto.mostrar {
-
-    display: flex;
-}
-
-
-.victoria {
-
+.carta.volteada,
+.carta.encontrada {
     background: white;
-
-    width: 90%;
-
-    max-width: 420px;
-
-    padding: 40px 25px;
-
-    text-align: center;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.2);
-
-    animation: aparecer 0.4s ease;
+    color: #7b2cbf;
 }
 
-
-.trofeo {
-
-    font-size: 65px;
-
-    margin-bottom: 10px;
+.carta.encontrada {
+    background: #d8f3dc;
 }
 
-
-.victoria h2 {
-
-    color: #8d5bb5;
-
-    font-size: 30px;
-
-    margin-bottom: 10px;
-}
-
-
-.victoria p {
-
-    color: #6d6374;
-
-    margin-bottom: 10px;
-}
-
-
-#resultado {
-
+.mensaje {
+    margin-top: 25px;
+    font-size: 20px;
     font-weight: bold;
-
-    color: #8d5bb5;
-
-    margin-bottom: 25px;
+    color: #7b2cbf;
 }
 
-
-@keyframes aparecer {
-
-    from {
-        transform: scale(0.7);
-
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-
-        opacity: 1;
-    }
-}
-
-
-/* ================================
-   FOOTER
-================================ */
-
-footer {
-
-    text-align: center;
-
-    background: #30263d;
-
-    color: white;
-
-    padding: 25px;
-
-    margin-top: 50px;
-
-    line-height: 1.8;
-}
-
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 650px) {
-
-    .encabezado {
-
-        padding: 15px 5%;
-    }
-
-    .logo h1 {
-        font-size: 21px;
-    }
-
-    .volver {
-        padding: 8px 12px;
-    }
-
-    .juego {
-        width: 94%;
-    }
-
-    .titulo h2 {
+@media (max-width: 600px) {
+    .carta {
+        height: 75px;
         font-size: 30px;
     }
 
     .tablero {
-
         gap: 8px;
-
-        grid-template-columns:
-            repeat(4, 1fr);
-    }
-
-    .carta {
-
-        height: 90px;
-    }
-
-    .carta.atras,
-    .carta.frente {
-
-        font-size: 32px;
-    }
-
-    .dato {
-
-        width: 130px;
     }
 }
