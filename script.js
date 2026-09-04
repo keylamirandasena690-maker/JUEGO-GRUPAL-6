@@ -1436,107 +1436,162 @@ document.addEventListener(
 
 
 document.addEventListener("DOMContentLoaded", function() {
-const entradaNumero = document.getElementById("numero");
-const botonComprobar = document.getElementById("comprobar");
-const botonReiniciar = document.getElementById("reiniciar");
-const mensaje = document.getElementById("mensaje");
-const intentosTexto = document.getElementById("intentos"); 
+    
+    // CONTROL DE VENTANAS Y PERFILES
+    const ventanaEdad = document.getElementById("ventana-edad");
+    const interfazPlataforma = document.getElementById("interfaz-plataforma");
+    const btnNinos = document.getElementById("modo-ninos");
+    const btnJovenes = document.getElementById("modo-jovenes");
+    const btnCambiarModo = document.getElementById("btn-cambiar-modo");
 
-let numeroSecreto;
-let intentos;
-let juegoTerminado;
-let modoActual = "jovenes"; // Por defecto
-let rangoMaximo = 100;
+    // LABELS DINÁMICOS POR EDAD
+    const tituloBienvenida = document.getElementById("titulo-bienvenida");
+    const subBienvenida = document.getElementById("sub-bienvenida");
+    const descKids = document.querySelectorAll(".desc-kids");
+    const descTeens = document.querySelectorAll(".desc-teens");
 
-// Detectar el modo desde la ventana principal (si aplica) o crear botones dinámicos en la barra
-function inicializarEstiloModo() {
-const h1 = document.querySelector("h1");
-const pDesc = document.querySelector("main p");
-// Crear botones de cambio rápido si no existen
-if (!document.getElementById("cambio-modo-juego")) {
-    const contenedorModos = document.createElement("div");
-    contenedorModos.id = "cambio-modo-juego";
-    contenedorModos.style.margin = "15px 0";
-    contenedorModos.innerHTML = `
-    `;
-    h1.insertAdjacentElement('afterend', contenedorModos);
+    // NAVEGACIÓN MECÁNICA POR TABS
+    const tabLinks = document.querySelectorAll(".tab-link:not(.cambio-edad)");
+    const vistasSeccion = document.querySelectorAll(".vista-seccion");
 
-    document.getElementById("btn-kids").addEventListener("click", () => cambiarModo("ninos"));
-    document.getElementById("btn-teens").addEventListener("click", () => cambiarModo("jovenes"));
-}
+    // MODAL INTERNO AHORCADO
+    const ventanaModalAhorcado = document.getElementById("ventana-modal-ahorcado");
+    const btnJugarAhorcado = document.getElementById("btn-jugar-ahorcado");
+    const btnCerrarAhorcado = document.getElementById("btn-cerrar-ahorcado-modal");
+    const btnReiniciarAhorcadoRapido = document.getElementById("btn-reiniciar-ahorcado-rapido");
+    const contenedorPalabraSecreta = document.getElementById("contenedor-palabra-secreta");
+    const marcadorIntentosAhorcado = document.getElementById("marcador-intentos-ahorcado");
+    const letrasTecladoVirtual = document.getElementById("letras-teclado-virtual");
+    const mensajeResultadoAhorcado = document.getElementById("mensaje-resultado-ahorcado");
 
-if (modoActual === "ninos") {
-    document.body.style.background = "linear-gradient(135deg, #fff9e6, #ffe6a7)";
-    h1.textContent = "✨ ¡Adivina el Número Mágico! ✨";
-    pDesc.textContent = "¡Intenta descubrir el número secreto del 1 al 10!";
-    rangoMaximo = 10;
-} else {
-    document.body.style.background = "linear-gradient(135deg, #120c1f, #1d152e)";
-    document.body.style.color = "#e0dbec";
-    h1.textContent = "🚀 Algoritmo: Adivina el Número";
-    pDesc.textContent = "Descifra el valor numérico aleatorio entre 1 y 100.";
-    rangoMaximo = 100;
-}
-iniciarJuego();
+    // LÓGICA DEL JUEGO AHORCADO
+    const bancoPalabras = ["SENA", "CODIGO", "COMPUTADORA", "INTERNET", "TECLADO", "PANTALLA", "JUEGO", "HTML"];
+    let palabraOculta = "";
+    let letrasAdivinadas = [];
+    let intentosRestantes = 6;
 
-}
+    // ASIGNAR ENTORNO/MODO DE EDAD
+    function seleccionarModo(modo) {
+        ventanaEdad.classList.add("oculto");
+        interfazPlataforma.classList.remove("oculto");
+        document.body.className = ""; // Limpia clases previas
+        
+        if (modo === "ninos") {
+            document.body.classList.add("entorno-ninos");
+            tituloBienvenida.textContent = "✨ ¡Bienvenidos a la Zona de Juegos! ✨";
+            subBienvenida.textContent = "Elige el juego que más te guste y diviértete aprendiendo.";
+            descKids.forEach(el => el.classList.remove("oculto"));
+            descTeens.forEach(el => el.classList.add("oculto"));
+        } else {
+            document.body.classList.add("entorno-jovenes");
+            tituloBienvenida.textContent = "🚀 Panel de Control Gamer - Code Power";
+            subBienvenida.textContent = "Optimiza tus habilidades técnicas y algorítmicas en nuestro entorno interactivo.";
+            descKids.forEach(el => el.classList.add("oculto"));
+            descTeens.forEach(el => el.classList.remove("oculto"));
+        }
+    }
 
-function cambiarModo(nuevoModo) {
-modoActual = nuevoModo;
-inicializarEstiloModo();
-}
+    btnNinos.addEventListener("click", () => seleccionarModo("ninos"));
+    btnJovenes.addEventListener("click", () => seleccionarModo("jovenes"));
+    
+    btnCambiarModo.addEventListener("click", () => {
+        interfazPlataforma.classList.add("oculto");
+        ventanaEdad.classList.remove("oculto");
+    });
 
-function iniciarJuego() {
-numeroSecreto = Math.floor(Math.random() * rangoMaximo) + 1;
-intentos = 0;
-juegoTerminado = false;
-entradaNumero.value = "";
-entradaNumero.max = rangoMaximo;
-entradaNumero.placeholder = `Número del 1 al ${rangoMaximo}`;
-mensaje.textContent = "";
-intentosTexto.textContent = intentos;
-entradaNumero.disabled = false;
-botonComprobar.disabled = false;
-entradaNumero.focus();
+    // SISTEMA MECÁNICO DE CAMBIO DE VENTANAS (TABS)
+    tabLinks.forEach(tab => {
+        tab.addEventListener("click", function() {
+            tabLinks.forEach(t => t.classList.remove("activo"));
+            this.classList.add("activo");
 
-}
+            const seccionDestino = this.getAttribute("data-target");
+            vistasSeccion.forEach(vista => {
+                if (vista.id === seccionDestino) {
+                    vista.classList.remove("oculto");
+                } else {
+                    vista.classList.add("oculto");
+                }
+            });
+        });
+    });
 
-function comprobarNumero() {
-if (juegoTerminado) return;
-const numero = Number(entradaNumero.value);
+    // MECÁNICA DEL JUEGO: AHORCADO
+    function iniciarAhorcado() {
+        palabraOculta = bancoPalabras[Math.floor(Math.random() * bancoPalabras.length)];
+        letrasAdivinadas = [];
+        intentosRestantes = 6;
+        mensajeResultadoAhorcado.textContent = "";
+        mensajeResultadoAhorcado.style.color = "inherit";
+        marcadorIntentosAhorcado.textContent = intentosRestantes;
 
-if (entradaNumero.value === "" || numero < 1 || numero > rangoMaximo) {
-    mensaje.textContent = `⚠️ Escribe un número válido del 1 al ${rangoMaximo}.`;
-    mensaje.style.color = "#ff7096";
-    return;
-}
+        actualizarVisualizacionPalabra();
+        construirTecladoVirtual();
+    }
 
-intentos++;
-intentosTexto.textContent = intentos;
+    function actualizarVisualizacionPalabra() {
+        let cadenaMostrar = "";
+        palabraOculta.split("").forEach(letra => {
+            if (letrasAdivinadas.includes(letra)) {
+                cadenaMostrar += letra + " ";
+            } else {
+                cadenaMostrar += "_ ";
+            }
+        });
+        contenedorPalabraSecreta.textContent = cadenaMostrar.trim();
 
-if (numero === numeroSecreto) {
-    mensaje.textContent = modoActual === "ninos" ? "🎉 ¡Súper! ¡Lo lograste, encontraste el número!" : "🎉 ¡Correcto! Objetivo completado.";
-    mensaje.style.color = "#2a9d8f";
-    juegoTerminado = true;
-    entradaNumero.disabled = true;
-    botonComprobar.disabled = true;
-} else if (numero < numeroSecreto) {
-    mensaje.textContent = "⬆️ El número secreto es MÁS ALTO.";
-    mensaje.style.color = "#7b2cbf";
-} else {
-    mensaje.textContent = "⬇️ El número secreto es MÁS BAJO.";
-    mensaje.style.color = "#7b2cbf";
-}
+        // Validar Victoria
+        if (!cadenaMostrar.includes("_")) {
+            mensajeResultadoAhorcado.textContent = "🎉 ¡Felicidades! Descubriste la palabra.";
+            mensajeResultadoAhorcado.style.color = "#2a9d8f";
+            bloquearTeclado();
+        }
+    }
 
-entradaNumero.focus();
-entradaNumero.select();
+    function construirTecladoVirtual() {
+        letrasTecladoVirtual.innerHTML = "";
+        const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
+        
+        alfabeto.forEach(letra => {
+            const btnLetra = document.createElement("button");
+            btnLetra.textContent = letra;
+            btnLetra.addEventListener("click", function() {
+                this.disabled = true;
+                procesarLetraJugada(letra);
+            });
+            letrasTecladoVirtual.appendChild(btnLetra);
+        });
+    }
 
-}
+    function procesarLetraJugada(letra) {
+        if (palabraOculta.includes(letra)) {
+            letrasAdivinadas.push(letra);
+            actualizarVisualizacionPalabra();
+        } else {
+            intentosRestantes--;
+            marcadorIntentosAhorcado.textContent = intentosRestantes;
+            if (intentosRestantes <= 0) {
+                mensajeResultadoAhorcado.textContent = `💥 Fin del juego. La palabra era: ${palabraOculta}`;
+                mensajeResultadoAhorcado.style.color = "#e63946";
+                bloquearTeclado();
+            }
+        }
+    }
 
-botonComprobar.addEventListener("click", comprobarNumero);
-entradaNumero.addEventListener("keydown", (e) => { if (e.key === "Enter") comprobarNumero(); });
-botonReiniciar.addEventListener("click", iniciarJuego);
+    function bloquearTeclado() {
+        const botones = letrasTecladoVirtual.querySelectorAll("button");
+        botones.forEach(btn => btn.disabled = true);
+    }
 
-inicializarEstiloModo();
+    // GESTIÓN DE VENTANAS DEL MODAL
+    btnJugarAhorcado.addEventListener("click", () => {
+        ventanaModalAhorcado.style.display = "flex";
+        iniciarAhorcado();
+    });
 
+    btnCerrarAhorcado.addEventListener("click", () => {
+        ventanaModalAhorcado.style.display = "none";
+    });
+
+    btnReiniciarAhorcadoRapido.addEventListener("click", iniciarAhorcado);
 });
