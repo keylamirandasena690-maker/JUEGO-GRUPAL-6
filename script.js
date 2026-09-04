@@ -1430,3 +1430,99 @@ document.addEventListener(
 
     }
 );
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // ELEMENTOS CONTROL DEL ACCESO
+    const pantallaLogin = document.getElementById("pantalla-login");
+    const contenidoPlataforma = document.getElementById("contenido-plataforma");
+    const formularioLogin = document.getElementById("formulario-login");
+    const inputUsuario = document.getElementById("usuario");
+    const inputContrasena = document.getElementById("contrasena");
+    const btnOjo = document.getElementById("ver-contrasena");
+    const btnSalir = document.getElementById("btn-salir");
+
+    // ELEMENTOS DEL MENÚ DE NAVEGACIÓN
+    const enlacesNav = document.querySelectorAll(".nav-link:not(.salir)");
+    const vistas = document.querySelectorAll(".vista-seccion");
+
+    // ELEMENTOS DEL MODAL JUEGO AHORCADO
+    const modalAhorcado = document.getElementById("modal-ahorcado");
+    const btnAbrirAhorcado = document.getElementById("abrir-ahorcado");
+    const btnCerrarAhorcado = document.getElementById("cerrar-ahorcado");
+    const tecladoAhorcado = document.getElementById("teclado-ahorcado");
+
+    // 1. Mostrar / Ocultar contraseña (Ojito)
+    btnOjo.addEventListener("click", function() {
+        if (inputContrasena.type === "password") {
+            inputContrasena.type = "text";
+            btnOjo.textContent = "🙈";
+        } else {
+            inputContrasena.type = "password";
+            btnOjo.textContent = "👁";
+        }
+    });
+
+    // 2. Control de Acceso (Login)
+    formularioLogin.addEventListener("submit", function() {
+        // Validación básica: permite ingresar con cualquier usuario y clave para pruebas
+        if (inputUsuario.value.trim() !== "" && inputContrasena.value.trim() !== "") {
+            pantallaLogin.classList.add("contenido-oculto");
+            contenidoPlataforma.classList.remove("contenido-oculto");
+        }
+    });
+
+    // 3. Botón de Salir (Cerrar sesión)
+    btnSalir.addEventListener("click", function(e) {
+        e.preventDefault();
+        contenidoPlataforma.classList.add("contenido-oculto");
+        pantallaLogin.classList.remove("contenido-oculto");
+        formularioLogin.reset();
+    });
+
+    // 4. Navegación por pestañas (Inicio vs Acerca de)
+    enlacesNav.forEach(enlace => {
+        enlace.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Cambiar clase activa en el menú
+            enlacesNav.forEach(link => link.classList.remove("activo"));
+            this.classList.add("activo");
+
+            // Mostrar sección correspondiente
+            const seccionDestino = "seccion-" + this.getAttribute("data-seccion");
+            vistas.forEach(vista => {
+                if (vista.id === seccionDestino) {
+                    vista.classList.remove("contenido-oculto");
+                } else {
+                    vista.classList.add("contenido-oculto");
+                }
+            });
+        });
+    });
+
+    // 5. Control de Ventana Modal (Abrir/Cerrar Ahorcado)
+    btnAbrirAhorcado.addEventListener("click", function() {
+        modalAhorcado.style.display = "flex";
+        inicializarTecladoAhorcado();
+    });
+
+    btnCerrarAhorcado.addEventListener("click", function() {
+        modalAhorcado.style.display = "none";
+    });
+
+    // Generar las letras del abecedario dinámicamente para el Ahorcado
+    function inicializarTecladoAhorcado() {
+        tecladoAhorcado.innerHTML = "";
+        const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        
+        letras.forEach(letra => {
+            const botonLetra = document.createElement("button");
+            botonLetra.textContent = letra;
+            botonLetra.addEventListener("click", function() {
+                this.disabled = true; // Desactiva la letra al usarla
+            });
+            tecladoAhorcado.appendChild(botonLetra);
+        });
+    }
+});
