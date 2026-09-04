@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,94 +12,44 @@
 
 <body>
 
-    <header>
-        <div class="logo">CODE POWER</div>
+    <main class="contenedor">
 
         <a href="../../index.html" class="volver">
-            ← Volver
+            ← Volver al inicio
         </a>
-    </header>
 
-    <main>
+        <h1>❌ Tic Tac Toe ⭕</h1>
 
-        <section class="juego">
+        <p id="turno">
+            Turno del jugador X
+        </p>
 
-            <div class="titulo">
-                <span class="emoji">⭕</span>
+        <div id="tablero" class="tablero">
 
-                <div>
-                    <h1>Tic Tac Toe</h1>
-                    <p>El clásico juego de tres en línea</p>
-                </div>
-            </div>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
 
-            <div class="instrucciones">
-                <h2>¿Cómo se juega?</h2>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
 
-                <p>
-                    Dos jugadores deben colocar sus símbolos
-                    en el tablero.
-                </p>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
+            <button class="casilla"></button>
 
-                <p>
-                    Gana quien consiga primero tres símbolos
-                    iguales en línea, ya sea horizontal,
-                    vertical o diagonal.
-                </p>
-            </div>
+        </div>
 
-            <div class="informacion">
+        <p id="mensaje" class="mensaje"></p>
 
-                <div class="jugador jugador-x">
-                    <span>Jugador 1</span>
-                    <strong>✕</strong>
-                </div>
-
-                <div class="turno">
-                    <span>Turno de</span>
-                    <strong id="turno">✕</strong>
-                </div>
-
-                <div class="jugador jugador-o">
-                    <span>Jugador 2</span>
-                    <strong>○</strong>
-                </div>
-
-            </div>
-
-            <div id="tablero" class="tablero">
-
-                <button class="casilla" data-posicion="0"></button>
-                <button class="casilla" data-posicion="1"></button>
-                <button class="casilla" data-posicion="2"></button>
-
-                <button class="casilla" data-posicion="3"></button>
-                <button class="casilla" data-posicion="4"></button>
-                <button class="casilla" data-posicion="5"></button>
-
-                <button class="casilla" data-posicion="6"></button>
-                <button class="casilla" data-posicion="7"></button>
-                <button class="casilla" data-posicion="8"></button>
-
-            </div>
-
-            <p id="mensaje" class="mensaje">
-                Es el turno del jugador ✕
-            </p>
-
-            <button id="reiniciar" class="reiniciar">
-                🔄 Reiniciar juego
-            </button>
-
-        </section>
+        <button id="reiniciar">
+            Reiniciar juego
+        </button>
 
     </main>
-
-    <footer>
-        <p>Code Power | Proyecto SENA 2026</p>
-    </footer>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
