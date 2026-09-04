@@ -1,7 +1,3 @@
-/* ==================================
-   CONFIGURACIÓN GENERAL
-================================== */
-
 * {
     margin: 0;
     padding: 0;
@@ -14,51 +10,37 @@ html {
 
 body {
     font-family: Arial, sans-serif;
+    background:
+        linear-gradient(
+            rgba(250, 247, 255, 0.80),
+            rgba(238, 246, 255, 0.80)
+        ),
+        url("niña.png");
 
-    background: #faf7ff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
     color: #30263d;
 }
 
-
-/* ==================================
-   ENCABEZADO
-================================== */
-
 .encabezado {
-
     width: 100%;
-
     padding: 18px 8%;
-
     background: white;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     position: sticky;
-
     top: 0;
-
     z-index: 100;
-
-    box-shadow:
-        0 3px 12px
-        rgba(100, 70, 130, 0.10);
+    box-shadow: 0 3px 12px rgba(100, 70, 130, 0.10);
 }
 
-
-/* LOGO */
-
 .logo {
-
     display: flex;
-
     align-items: center;
-
     gap: 8px;
 }
 
@@ -67,673 +49,368 @@ body {
 }
 
 .logo h1 {
-
     color: #8d5bb5;
-
     font-size: 25px;
 }
 
-
-/* MENÚ */
-
 nav {
-
     display: flex;
-
     gap: 25px;
 }
 
 nav a {
-
     color: #51455e;
-
     text-decoration: none;
-
     font-weight: bold;
-
     transition: 0.3s;
 }
 
 nav a:hover {
-
     color: #a66bc4;
 }
 
-
-/* ==================================
-   INICIO
-================================== */
-
 .inicio {
-
     min-height: 600px;
-
     padding: 80px 10%;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     gap: 50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f8edff,
-            #eef6ff
-        );
+    background: linear-gradient(135deg, #f8edff, #eef6ff);
 }
 
-
 .inicio-texto {
-
     max-width: 600px;
 }
 
-
 .etiqueta {
-
     color: #9b61bd;
-
     font-weight: bold;
-
     margin-bottom: 15px;
 }
 
-
 .inicio h2 {
-
     font-size: 52px;
-
     line-height: 1.1;
-
     margin-bottom: 25px;
 }
 
-
 .inicio h2 span {
-
     color: #a35fc2;
 }
 
-
 .descripcion-inicio {
-
     color: #655a70;
-
     font-size: 18px;
-
     line-height: 1.7;
-
     margin-bottom: 30px;
 }
 
-
-/* BOTÓN PRINCIPAL */
-
 .boton-principal {
-
     display: inline-block;
-
     padding: 14px 25px;
-
     background: #a66bc4;
-
     color: white;
-
     text-decoration: none;
-
     border-radius: 12px;
-
     font-weight: bold;
-
     transition: 0.3s;
 }
 
-
 .boton-principal:hover {
-
     background: #8f54ad;
-
     transform: translateY(-3px);
 }
 
-
-/* ==================================
-   TARJETA PRINCIPAL
-================================== */
-
 .inicio-imagen {
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 }
 
-
 .tarjeta-principal {
-
     width: 300px;
-
     height: 300px;
-
     background: white;
-
     border-radius: 30px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
-
-    box-shadow:
-        0 15px 40px
-        rgba(100, 70, 130, 0.15);
-
+    box-shadow: 0 15px 40px rgba(100, 70, 130, 0.15);
     transform: rotate(2deg);
 }
 
-
 .icono-principal {
-
     font-size: 85px;
-
     margin-bottom: 15px;
 }
 
-
 .tarjeta-principal h3 {
-
     color: #8d5bb5;
-
     font-size: 28px;
-
     margin-bottom: 5px;
 }
 
-
 .tarjeta-principal p {
-
     color: #777;
 }
-
-
-/* ==================================
-   SECCIONES
-================================== */
 
 .proyecto,
 .juegos,
 .equipo {
-
     padding: 80px 10%;
 }
 
-
 .subtitulo {
-
     text-align: center;
-
     color: #a15fc1;
-
     font-size: 14px;
-
     font-weight: bold;
-
     margin-bottom: 10px;
 }
-
 
 .proyecto h2,
 .juegos h2,
 .equipo h2 {
-
     text-align: center;
-
     font-size: 35px;
-
     margin-bottom: 40px;
 }
 
-
-/* ==================================
-   PROYECTO
-================================== */
-
 .proyecto-contenido {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 45px;
-
     align-items: center;
 }
 
-
 .texto-proyecto p {
-
     color: #655a70;
-
     line-height: 1.8;
-
     margin-bottom: 18px;
 }
 
-
-/* TECNOLOGÍAS */
-
 .tecnologias {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
-
 .tecnologia {
-
     background: white;
-
     padding: 25px 10px;
-
     text-align: center;
-
     border-radius: 18px;
-
-    box-shadow:
-        0 5px 20px
-        rgba(100, 70, 130, 0.08);
-
+    box-shadow: 0 5px 20px rgba(100, 70, 130, 0.08);
     transition: 0.3s;
 }
 
-
 .tecnologia:hover {
-
     transform: translateY(-5px);
 }
 
-
 .tecnologia span {
-
     font-size: 35px;
 }
 
-
 .tecnologia h3 {
-
     color: #8d5bb5;
-
     margin: 10px 0 5px;
 }
 
-
 .tecnologia p {
-
     color: #777;
 }
 
-
-/* ==================================
-   JUEGOS
-================================== */
-
 .juegos {
-
     background: #f4effa;
 }
 
-
 .texto-centro {
-
     text-align: center;
-
     color: #71687a;
-
     margin-top: -25px;
-
     margin-bottom: 40px;
 }
 
-
 .juegos-contenedor {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 22px;
 }
 
-
 .juego-card {
-
     background: white;
-
     padding: 30px 20px;
-
     border-radius: 20px;
-
     text-align: center;
-
-    box-shadow:
-        0 7px 20px
-        rgba(100, 70, 130, 0.10);
-
+    box-shadow: 0 7px 20px rgba(100, 70, 130, 0.10);
     transition: 0.3s;
 }
 
-
 .juego-card:hover {
-
     transform: translateY(-8px);
-
-    box-shadow:
-        0 12px 25px
-        rgba(100, 70, 130, 0.15);
 }
 
-
 .juego-icono {
-
     font-size: 55px;
-
     margin-bottom: 15px;
 }
 
-
 .juego-card h3 {
-
     color: #8d5bb5;
-
     margin-bottom: 12px;
-
     font-size: 22px;
 }
 
-
 .juego-card p {
-
     color: #706678;
-
     line-height: 1.6;
-
     min-height: 80px;
 }
 
-
-/* BOTONES DE JUEGOS */
-
 .boton-juego {
-
     display: inline-block;
-
     margin-top: 15px;
-
     padding: 11px 20px;
-
     background: #a66bc4;
-
     color: white;
-
     text-decoration: none;
-
     border-radius: 10px;
-
     font-weight: bold;
-
     transition: 0.3s;
 }
 
-
 .boton-juego:hover {
-
     background: #8f54ad;
-
     transform: scale(1.03);
 }
 
-
-/* ==================================
-   EQUIPO
-================================== */
-
 .equipo-contenedor {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
-
 .integrante {
-
     background: white;
-
     padding: 25px;
-
     text-align: center;
-
     border-radius: 18px;
-
-    box-shadow:
-        0 5px 20px
-        rgba(100, 70, 130, 0.08);
-
+    box-shadow: 0 5px 20px rgba(100, 70, 130, 0.08);
     transition: 0.3s;
 }
 
-
 .integrante:hover {
-
     transform: translateY(-5px);
 }
 
-
 .persona {
-
     font-size: 40px;
-
     margin-bottom: 10px;
 }
 
-
 .integrante h3 {
-
     color: #8d5bb5;
-
     margin-bottom: 8px;
 }
 
-
 .integrante p {
-
     color: #71687a;
-
     line-height: 1.5;
 }
 
-
-/* ==================================
-   CONTACTO
-================================== */
-
 .contacto {
-
     padding: 70px 10%;
-
     text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eedeff,
-            #e8f5ff
-        );
+    background: linear-gradient(135deg, #eedeff, #e8f5ff);
 }
 
-
 .contacto h2 {
-
     font-size: 32px;
-
     margin-bottom: 15px;
 }
 
-
 .contacto p {
-
     color: #655a70;
-
     margin-bottom: 20px;
 }
 
-
 .correo {
-
     color: #8d5bb5;
-
     text-decoration: none;
-
     font-weight: bold;
 }
 
-
 .correo:hover {
-
     text-decoration: underline;
 }
 
-
-/* ==================================
-   FOOTER
-================================== */
-
 footer {
-
     background: #30263d;
-
     color: white;
-
     text-align: center;
-
     padding: 25px;
-
     line-height: 1.8;
 }
 
-
-/* ==================================
-   RESPONSIVE
-================================== */
-
 @media (max-width: 1000px) {
-
     .juegos-contenedor {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-
 @media (max-width: 850px) {
-
     .encabezado {
-
         flex-direction: column;
-
         gap: 15px;
     }
 
-
     .inicio {
-
         flex-direction: column;
-
         text-align: center;
-
         padding: 70px 7%;
     }
 
-
     .inicio h2 {
-
         font-size: 42px;
     }
 
-
     .proyecto-contenido {
-
         grid-template-columns: 1fr;
     }
 
-
     .equipo-contenedor {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-
 @media (max-width: 600px) {
-
     nav {
-
         gap: 12px;
-
         flex-wrap: wrap;
-
         justify-content: center;
     }
 
-
     .inicio {
-
         padding: 60px 6%;
     }
 
-
     .tarjeta-principal {
-
         width: 240px;
-
         height: 240px;
     }
-
 
     .juegos-contenedor,
     .equipo-contenedor,
     .tecnologias {
-
         grid-template-columns: 1fr;
     }
-
 
     .proyecto,
     .juegos,
     .equipo {
-
         padding: 60px 6%;
     }
-
 }
