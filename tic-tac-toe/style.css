@@ -1,0 +1,352 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #eee6ff,
+        #e5f1ff,
+        #ffe8f4
+    );
+
+    color: #333;
+}
+
+/* ENCABEZADO */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 8%;
+
+    background: white;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    color: #7045ad;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.volver {
+    text-decoration: none;
+
+    color: #7045ad;
+
+    background: #f0e8ff;
+
+    padding: 10px 18px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.volver:hover {
+    background: #dfcff8;
+}
+
+/* CONTENIDO */
+
+main {
+    min-height: calc(100vh - 140px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+.juego {
+    width: 100%;
+    max-width: 650px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 12px 35px rgba(80, 55, 110, 0.15);
+}
+
+/* TITULO */
+
+.titulo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+.emoji {
+    font-size: 55px;
+}
+
+h1 {
+    color: #7045ad;
+    font-size: 34px;
+
+    margin-bottom: 5px;
+}
+
+.titulo p {
+    color: #777;
+    font-size: 16px;
+}
+
+/* INSTRUCCIONES */
+
+.instrucciones {
+    background: #f7f2ff;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+}
+
+.instrucciones h2 {
+    color: #7045ad;
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+}
+
+.instrucciones p {
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 6px;
+}
+
+/* INFORMACION */
+
+.informacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.jugador,
+.turno {
+    flex: 1;
+
+    text-align: center;
+
+    background: #faf8ff;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: 1px solid #eee4ff;
+}
+
+.jugador span,
+.turno span {
+    display: block;
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.jugador strong,
+.turno strong {
+    font-size: 28px;
+}
+
+.jugador-x strong {
+    color: #8052bd;
+}
+
+.jugador-o strong {
+    color: #e486b6;
+}
+
+.turno strong {
+    color: #7045ad;
+}
+
+/* TABLERO */
+
+.tablero {
+    width: 330px;
+    height: 330px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    padding: 10px;
+
+    background: #f1eaff;
+
+    border-radius: 20px;
+}
+
+.casilla {
+    border: none;
+
+    border-radius: 12px;
+
+    background: white;
+
+    font-size: 55px;
+
+    font-weight: bold;
+
+    color: #7045ad;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.casilla:hover {
+    background: #faf5ff;
+
+    transform: scale(1.03);
+}
+
+.casilla.x {
+    color: #8052bd;
+}
+
+.casilla.o {
+    color: #e486b6;
+}
+
+.casilla.ganadora {
+    background: #e9dcff;
+}
+
+/* MENSAJE */
+
+.mensaje {
+    text-align: center;
+
+    min-height: 25px;
+
+    margin-top: 22px;
+
+    color: #7045ad;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+/* REINICIAR */
+
+.reiniciar {
+    display: block;
+
+    margin: 25px auto 0;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #f2dfef;
+
+    color: #704269;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.reiniciar:hover {
+    background: #e4c8df;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 18px 5%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .juego {
+        padding: 25px 18px;
+    }
+
+    .titulo {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .informacion {
+        gap: 8px;
+    }
+
+    .jugador,
+    .turno {
+        padding: 12px 5px;
+    }
+
+    .tablero {
+        width: 280px;
+        height: 280px;
+    }
+
+    .casilla {
+        font-size: 45px;
+    }
+}
