@@ -522,157 +522,190 @@
 </html>
 
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CODE POWER ✨ Zona Gamer Interactiva</title>
+    <title>CODE POWER ✨ Consola Arcade Real</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- VENTANA 1: SELECCIÓN DE EDAD (Aparece al inicio) -->
-    <div id="ventana-edad" class="modal-bienvenida">
-        <div class="tarjeta-bienvenida antialiased">
-            <div class="header-animado">⚡ CODE POWER ⚡</div>
-            <h2>¡Hola! Cuéntanos, ¿cuántos años tienes?</h2>
-            <p>Elige tu modo de juego para adaptar la diversión:</p>
-            
-            <div class="contenedor-modos">
-                <button id="modo-ninos" class="btn-modo ninos">
-                    <span class="avatar-modo">🎨</span>
-                    <h3>Modo Niños</h3>
-                    <p>Diseño divertido y fácil</p>
-                </button>
-                <button id="modo-jovenes" class="btn-modo jovenes">
-                    <span class="avatar-modo">🚀</span>
-                    <h3>Modo Jóvenes</h3>
-                    <p>Estilo Gamer y competitivo</p>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTENIDO GENERAL DE LA PLATAFORMA (Oculto al inicio) -->
-    <div id="interfaz-plataforma" class="oculto">
+    <!-- MENÚ PRINCIPAL DE LA CONSOLA -->
+    <div id="contenedor-consola" class="consola-visible">
         
-        <!-- Barra de Navegación Mecánica -->
-        <header class="encabezado-interactivo">
-            <div id="logo-dinamico" class="logo-power">💻 CODE POWER</div>
-            <nav class="menu-navegacion">
-                <button class="tab-link activo" data-target="seccion-juegos">🎮 Zona de Juegos</button>
-                <button class="tab-link" data-target="seccion-acerca">📚 Nuestro Proyecto</button>
-                <button id="btn-cambiar-modo" class="tab-link cambio-edad">🔄 Cambiar Edad</button>
+        <header class="encabezado-gamer">
+            <div class="logo-gaming">⚡ CODE POWER ⚡</div>
+            <nav>
+                <button class="nav-btn activo" data-target="vista-arcade">🎮 Arcade</button>
+                <button class="nav-btn" data-target="vista-creditos">📚 Créditos</button>
             </nav>
         </header>
 
-        <!-- SECCIÓN: PLATAFORMA DE JUEGOS -->
-        <main id="seccion-juegos" class="vista-seccion container">
-            <div class="intro-juegos">
-                <h1 id="titulo-bienvenida">¡A jugar y aprender!</h1>
-                <p id="sub-bienvenida">Selecciona tu reto favorito del menú interactivo.</p>
+        <main id="vista-arcade" class="seccion-consola container">
+            <div class="bienvenida-arcade">
+                <h1>¡Bienvenidos a la Zona Gamer Interactiva!</h1>
+                <p>Selecciona uno de nuestros juegos modificados para iniciar la experiencia en pantalla completa.</p>
             </div>
 
-            <div class="grid-juegos-animados">
-                
-                <!-- 1. AHORCADO (Mecánico/Modal interno) -->
-                <div class="card-juego-interactivo c-ahorcado">
-                    <div class="burbuja-icono">🔤</div>
-                    <h3>Ahorcado</h3>
-                    <p class="desc-kids oculto">¡Encuentra la palabra oculta antes de que se acaben los intentos y salva al personaje!</p>
-                    <p class="desc-teens">Descubre la palabra secreta mediante lógica y deducción de caracteres alfanuméricos.</p>
-                    <button id="btn-jugar-ahorcado" class="btn-accion-juego">¡Jugar Ahora! →</button>
+            <div class="grid-arcade">
+                <div class="arcade-card c-ahorcado">
+                    <div class="icono">🔤</div>
+                    <h3>Ahorcado Gráfico</h3>
+                    <p>Adivina la palabra en tiempo real antes de completar el personaje gráfico.</p>
+                    <button class="btn-lanzar" data-juego="juego-ahorcado">Iniciar Juego</button>
                 </div>
-
-                <!-- 2. ADIVINA EL NÚMERO -->
-                <div class="card-juego-interactivo c-adivina">
-                    <div class="burbuja-icono">🔢</div>
-                    <h3>Adivina el Número</h3>
-                    <p class="desc-kids oculto">¡Adivina el número mágico oculto del 1 al 100! ¿Podrás lograrlo?</p>
-                    <p class="desc-teens">Descifra el valor escalar pseudoaleatorio en el rango de 1 a 100 en el menor número de iteraciones.</p>
-                    <a href="adivina-el-numero/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                <div class="arcade-card c-adivina">
+                    <div class="icono">🔢</div>
+                    <h3>Adivina con Pistas</h3>
+                    <p>Analiza los datos y pistas secretas automáticas antes de arriesgar tu número.</p>
+                    <button class="btn-lanzar" data-juego="juego-adivina">Iniciar Juego</button>
                 </div>
-
-                <!-- 3. TIC TAC TOE -->
-                <div class="card-juego-interactivo c-tictac">
-                    <div class="burbuja-icono">❌</div>
-                    <h3>Tic Tac Toe</h3>
-                    <p class="desc-kids oculto">¡El clásico juego de tres en línea! Reta a tus amigos y gana.</p>
-                    <p class="desc-teens">Despliega tu estrategia matricial bidimensional para alinear tres vectores antes que tu contrincante.</p>
-                    <a href="tic-tac-toe/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                <div class="arcade-card c-tictac">
+                    <div class="icono">❌</div>
+                    <h3>Tic Tac Toe Inteligente</h3>
+                    <p>Compite contra la computadora en solitario o reta a un compañero local.</p>
+                    <button class="btn-lanzar" data-juego="juego-tictac">Iniciar Juego</button>
                 </div>
-
-                <!-- 4. MEMORIA -->
-                <div class="card-juego-interactivo c-memoria">
-                    <div class="burbuja-icono">🧠</div>
-                    <h3>Cartas de Memoria</h3>
-                    <p class="desc-kids oculto">¡Encuentra las parejas de frutas iguales dándole la vuelta a las cartas!</p>
-                    <p class="desc-teens">Maximiza tu retención cognitiva localizando los pares de datos idénticos en el tablero indexado.</p>
-                    <a href="memoria/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                <div class="arcade-card c-memoria">
+                    <div class="icono">🧠</div>
+                    <h3>Memoria Gigante 3D</h3>
+                    <p>Tablero modular con efectos de rotación e imágenes tridimensionales adaptadas.</p>
+                    <button class="btn-lanzar" data-juego="juego-memoria">Iniciar Juego</button>
                 </div>
-
-                <!-- 5. BUSCAMINAS -->
-                <div class="card-juego-interactivo c-buscamina">
-                    <div class="burbuja-icono">💣</div>
-                    <h3>Buscaminas</h3>
-                    <p class="desc-kids oculto">¡Cuidado con las bombas! Limpia el tablero pisando los bloques seguros.</p>
-                    <p class="desc-teens">Ejecuta un barrido lógico de campo minado barriendo celdas seguras mediante análisis numérico de proximidad.</p>
-                    <a href="buscaminas/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                <div class="arcade-card c-buscamina">
+                    <div class="icono">💣</div>
+                    <h3>Buscaminas Explosivo</h3>
+                    <p>Sobrevive a las explosiones continuas y limpia la cuadrícula de peligro.</p>
+                    <button class="btn-lanzar" data-juego="juego-buscamina">Iniciar Juego</button>
                 </div>
-
             </div>
         </main>
 
-        <!-- SECCIÓN: ACERCA DE + CRÉDITOS INTEGRANTES -->
-        <div id="seccion-acerca" class="vista-seccion container oculto">
-            <div class="panel-informacion-creativa">
-                <h2>📚 Acerca de Code Power</h2>
-                <p>Este ecosistema de software interactivo fue diseñado con fines pedagógicos y lúdicos.</p>
-                
-                <div class="caja-detalles">
-                    <h3>🎯 Misión Pedagógica</h3>
-                    <p>Fomentar el pensamiento lógico-matemático y la resolución de problemas lógicos mediante mecánicas de juego en HTML5, CSS3 y JavaScript moderno.</p>
-                </div>
-
-                <!-- Créditos Animados Especiales -->
-                <div class="seccion-creditos-equipo">
-                    <h3>⭐ Desarrollado con ❤️ por el Equipo:</h3>
-                    <div class="grid-integrantes">
-                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Yaniris Durán</h4></div>
-                        <div class="avatar-integrante"><span>👩>💻</span><h4>Daniela Murillo</h4></div>
-                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Sofia Montes</h4></div>
-                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Taliana Ortiz</h4></div>
-                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Lauren Oliveros</h4></div>
-                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Keyla Miranda</h4></div>
+        <div id="vista-creditos" class="seccion-consola container oculto">
+            <div class="creditos-box">
+                <h2>📚 Nuestro Proyecto Escolar SENA</h2>
+                <div class="equipo-sena">
+                    <h3>⭐ Desarrolladoras Oficiales:</h3>
+                    <div class="lista-chicas">
+                        <div class="chica"><span>👩‍💻</span><h4>Yaniris Durán</h4></div>
+                        <div class="chica"><span>👩‍💻</span><h4>Daniela Murillo</h4></div>
+                        <div class="chica"><span>👩‍💻</span><h4>Sofia Montes</h4></div>
+                        <div class="chica"><span>👩‍💻</span><h4>Taliana Ortiz</h4></div>
+                        <div class="chica"><span>👩‍💻</span><h4>Lauren Oliveros</h4></div>
+                        <div class="chica"><span>👩‍💻</span><h4>Keyla Miranda</h4></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="footer-interactivo">
-            <p>© 2026 Code Power | Proyecto Escolar SENA</p>
-            <p class="firmas">Yaniris • Daniela • Sofia • Taliana • Lauren • Keyla</p>
+        <footer class="footer-consola">
+            <p>© 2026 Code Power | Proyecto Educativo Integrado</p>
         </footer>
     </div>
 
-    <!-- VENTANA MODAL DINÁMICA: JUEGO DEL AHORCADO -->
-    <div id="ventana-modal-ahorcado" class="capa-modal-juego">
-        <div class="contenedor-interno-juego">
-            <div class="barra-superior-modal">
-                <h3>🔤 Mini-Juego: Ahorcado</h3>
-                <div class="controles-modal-directos">
-                    <button id="btn-reiniciar-ahorcado-rapido" class="btn-control-top reiniciar">🔄 Reiniciar Partida</button>
-                    <button id="btn-cerrar-ahorcado-modal" class="btn-control-top salir">↩️ Regresar al Menú</button>
+    <!-- PANTALLA COMPLETA GAMER (MODO ARCADE) -->
+    <div id="contenedor-arcade-pantalla" class="oculto">
+        
+        <div class="barra-escape-arcade">
+            <div id="selector-edad-interno" class="control-edad-inline">
+                <button id="set-ninos" class="btn-edad active">🎨 Modo Niños (Fácil)</button>
+                <button id="set-jovenes" class="btn-edad">🚀 Modo Jóvenes (Pro)</button>
+            </div>
+            <button id="btn-salir-arcade" class="btn-salir-global">↩️ Salir al Menú</button>
+        </div>
+
+        <div id="contenedor-juego-activo" class="pantalla-dinamica-juego">
+            
+            <!-- JUEGO 1: AHORCADO -->
+            <div id="juego-ahorcado" class="modulo-juego oculto">
+                <h2>🔤 Ahorcado Gráfico Dinámico</h2>
+                <div class="split-ahorcado">
+                    <div class="grafico-ahorcado">
+                        <div id="a-base" class="parte-a oculto">🪵</div>
+                        <div id="a-soga" class="parte-a oculto">🪘</div>
+                        <div id="a-cabeza" class="parte-a oculto">🥴</div>
+                        <div id="a-cuerpo" class="parte-a oculto">👕</div>
+                        <div id="a-brazos" class="parte-a oculto">🙌</div>
+                        <div id="a-piernas" class="parte-a oculto">🩳</div>
+                    </div>
+                    <div class="panel-letras">
+                        <div id="ahorcado-palabra" class="lineas-letras">_ _ _ _</div>
+                        <p>Vidas restantes: <strong id="ahorcado-intentos">6</strong></p>
+                        <div id="ahorcado-teclado" class="teclado-gamer"></div>
+                    </div>
                 </div>
+                <button id="reiniciar-ahorcado" class="btn-reset">🔄 Reiniciar Partida</button>
             </div>
 
-            <div class="area-juego-ahorcado">
-                <div id="contenedor-palabra-secreta" class="letras-guiones">_ _ _ _ _</div>
-                <div class="contador-fallos">Intentos restantes: <strong id="marcador-intentos-ahorcado">6</strong></div>
-                <p id="mensaje-resultado-ahorcado" class="alertas-juego"></p>
-                <div id="letras-teclado-virtual" class="teclado-pantalla"></div>
+            <!-- JUEGO 2: ADIVINA EL NÚMERO -->
+            <div id="juego-adivina" class="modulo-juego oculto">
+                <h2>🔢 Adivina el Número con Pistas</h2>
+                <div class="caja-pistas" id="pista-caja">💡 Pista Inicial: ¡Cargando datos!</div>
+                <div class="interaccion-adivina">
+                    <input type="number" id="adivina-input" placeholder="Escribe aquí">
+                    <button id="adivina-btn-comprobar" class="btn-comprobar-action">Comprobar</button>
+                </div>
+                <div class="controles-adivina-abajo">
+                    <p class="intentos-txt">Intentos: <strong id="adivina-intentos">0</strong></p>
+                    <button id="btn-revelar-magico" class="btn-ayuda-kids oculto">🎁 ¿Te rindes? ¡Ver Número!</button>
+                </div>
+                <button id="reiniciar-adivina" class="btn-reset">🔄 Reiniciar Partida</button>
+            </div>
+
+            <!-- JUEGO 3: TIC TAC TOE -->
+            <div id="juego-tictac" class="modulo-juego oculto">
+                <h2>❌ Tic Tac Toe Inteligente</h2>
+                <div class="setup-tictac">
+                    <button id="tictac-1p" class="btn-edad active">👤 vs Inteligencia Artificial</button>
+                    <button id="tictac-2p" class="btn-edad">👥 Modo 2 Jugadores</button>
+                </div>
+                <div id="tictac-tablero" class="tictac-grid">
+                    <div class="tictac-celda" data-idx="0"></div>
+                    <div class="tictac-celda" data-idx="1"></div>
+                    <div class="tictac-celda" data-idx="2"></div>
+                    <div class="tictac-celda" data-idx="3"></div>
+                    <div class="tictac-celda" data-idx="4"></div>
+                    <div class="tictac-celda" data-idx="5"></div>
+                    <div class="tictac-celda" data-idx="6"></div>
+                    <div class="tictac-celda" data-idx="7"></div>
+                    <div class="tictac-celda" data-idx="8"></div>
+                </div>
+                <button id="reiniciar-tictac" class="btn-reset">🔄 Reiniciar Partida</button>
+            </div>
+
+            <!-- JUEGO 4: MEMORIA GIGANTE -->
+            <div id="juego-memoria" class="modulo-juego oculto">
+                <h2>🧠 Memoria 3D Animada</h2>
+                <p class="movs-p">Movimientos: <strong id="memoria-movimientos">0</strong></p>
+                <div id="memoria-tablero" class="memoria-grid-gigante"></div>
+                <button id="reiniciar-memoria" class="btn-reset">🔄 Reiniciar Partida</button>
+            </div>
+
+            <!-- JUEGO 5: BUSCAMINAS -->
+            <div id="juego-buscamina" class="modulo-juego oculto">
+                <h2>💣 Buscaminas con Explosiones</h2>
+                <div class="stats-buscamina">
+                    <span>Tiempo: <strong id="mines-time">0</strong>s</span>
+                    <span>Bombas Explotadas: <strong id="mines-fallos" style="color: #ff477e;">0</strong></span>
+                </div>
+                <div id="mines-tablero" class="mines-grid-dinamica"></div>
+                <button id="reiniciar-buscamina" class="btn-reset">🔄 Reiniciar Partida</button>
+            </div>
+
+        </div>
+        
+        <!-- VENTANA DE RESULTADOS (CONFETI VISUAL) -->
+        <div id="feedback-pantalla" class="feedback-overlay oculto">
+            <div class="feedback-contenido animate-pop">
+                <h1 id="feedback-titulo">🎉 ¡SÚPER GANASTE! 🎉</h1>
+                <p id="feedback-sub">¡Eres el mejor jugador del equipo!</p>
+                <button id="btn-cerrar-feedback" class="btn-reset">¡Jugar de Nuevo!</button>
             </div>
         </div>
     </div>
@@ -680,5 +713,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
