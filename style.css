@@ -1703,367 +1703,227 @@ footer p {
 
 }
 
+
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    transition: background 0.4s, color 0.4s, transform 0.2s;
 }
 
 body {
-    background: linear-gradient(135deg, #f4e8ff, #e1f4ff);
-    color: #352642;
+    background: #f7f0ff;
+    color: #2b1d3d;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* CLASES DE CONTROL DE VISIBILIDAD (Súper importante) */
-.contenido-oculto {
+.oculto {
     display: none !important;
 }
 
-/* ESTILOS DEL LOGIN */
-.seccion-login {
+/* VENTANA MODAL SELECCIÓN EDAD */
+.modal-bienvenida {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(43, 29, 61, 0.85);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    z-index: 1000;
 }
 
-.tarjeta-login {
+.tarjeta-bienvenida {
     background: white;
     padding: 40px 30px;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(100, 70, 130, 0.15);
+    border-radius: 30px;
     text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.3);
 }
 
-.tarjeta-login h1 {
-    color: #7b2cbf;
+.header-animado {
     font-size: 32px;
-    margin-bottom: 5px;
+    font-weight: 900;
+    color: #7b2cbf;
+    margin-bottom: 15px;
+    animation: pulso 2s infinite;
 }
 
-.sub-login {
-    color: #9d4edd;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-.tarjeta-login h2 {
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
-.campo {
-    text-align: left;
-    margin-top: 15px;
-}
-
-.campo label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #5a4375;
-}
-
-.campo input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e2d4f0;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-}
-
-.campo input:focus {
-    border-color: #9d4edd;
-}
-
-.input-password-container {
-    position: relative;
+.contenedor-modos {
     display: flex;
-    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
 }
 
-.btn-ojo {
-    position: absolute;
-    right: 12px;
-    background: none;
-    border: none;
+.btn-modo {
+    flex: 1;
+    padding: 25px 15px;
+    border: 3px solid transparent;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 18px;
+    background: #f9f6fc;
 }
 
-.btn-principal {
-    display: inline-block;
-    width: 100%;
+.btn-modo.ninos { border-color: #ffb703; }
+.btn-modo.ninos:hover { background: #ffe6a7; transform: scale(1.05); }
+.btn-modo.jovenes { border-color: #219ebc; }
+.btn-modo.jovenes:hover { background: #bde0fe; transform: scale(1.05); }
+
+.avatar-modo { font-size: 50px; display: block; margin-bottom: 10px; }
+
+/* ENTORNO ADAPTATIVO: MODO NIÑOS (Divertido, Pastel, Redondo) */
+body.entorno-ninos {
+    background: #fff9e6;
+}
+body.entorno-ninos .card-juego-interactivo {
+    background: white;
+    border-radius: 35px;
+    border: 4px solid #ffb703;
+}
+body.entorno-ninos .btn-accion-juego {
+    background: #ffb703;
+    color: #2b1d3d;
+    border-radius: 20px;
+}
+
+/* ENTORNO ADAPTATIVO: MODO JÓVENES (Gamer, Oscuro, Neón) */
+body.entorno-jovenes {
+    background: #120c1f;
+    color: #e0dbec;
+}
+body.entorno-jovenes .encabezado-interactivo,
+body.entorno-jovenes .card-juego-interactivo,
+body.entorno-jovenes .tarjeta-blanca,
+body.entorno-jovenes .panel-informacion-creativa {
+    background: #1d152e;
+    color: #e0dbec;
+    box-shadow: 0 8px 20px rgba(157, 78, 221, 0.2);
+}
+body.entorno-jovenes .btn-accion-juego,
+body.entorno-jovenes .btn-control-top.reiniciar {
     background: #9d4edd;
     color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
+}
+body.entorno-jovenes .tab-link.activo {
+    background: #3c1660;
+    color: #e0dbec;
 }
 
-.btn-principal:hover {
-    background: #7b2cbf;
-}
-
-/* ENCABEZADO Y NAVEGACIÓN */
-.encabezado {
+/* ENCABEZADOS Y TABS */
+.encabezado-interactivo {
     background: white;
     padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(100, 70, 130, 0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.logo {
-    font-size: 22px;
+.logo-power { font-weight: 900; font-size: 24px; color: #7b2cbf; }
+
+.menu-navegacion { display: flex; gap: 10px; }
+
+.tab-link {
+    background: none;
+    border: none;
+    padding: 10px 18px;
     font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+    color: #555;
+}
+.tab-link.activo, .tab-link:hover {
+    background: #e9dbff;
     color: #7b2cbf;
 }
+.tab-link.cambio-edad { background: #ffe5ec; color: #ff0054; }
 
-nav a {
-    text-decoration: none;
-    color: #65527a;
-    font-weight: 600;
-    margin-left: 20px;
-    padding: 5px 10px;
-    border-radius: 8px;
-    transition: 0.3s;
-}
+/* SECCIONES Y CONTENEDORES */
+.container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+.intro-juegos { text-align: center; margin-bottom: 40px; }
 
-nav a.activo, nav a:hover {
-    color: #7b2cbf;
-    background: #f1e4ff;
-}
-
-nav a.salir {
-    color: #ff7096;
-}
-nav a.salir:hover {
-    background: #ffe3eb;
-}
-
-/* INTERFAZ DE BIENVENIDA Y TARJETAS */
-.hero {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.hero h1 {
-    font-size: 36px;
-    color: #352642;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 18px;
-    color: #65527a;
-    max-width: 600px;
-    margin: 0 auto 25px;
-}
-
-.hero .btn-principal {
-    width: auto;
-    padding: 12px 30px;
-}
-
-.zona-juegos, .acerca-de {
-    padding: 40px 5%;
-    text-align: center;
-}
-
-.grid-juegos {
+.grid-juegos-animados {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-.tarjeta-juego {
+.card-juego-interactivo {
     background: white;
-    padding: 30px 20px;
+    padding: 35px 25px;
     border-radius: 20px;
-    box-shadow: 0 6px 15px rgba(100, 70, 130, 0.05);
-    transition: 0.3s;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+.card-juego-interactivo:hover { transform: translateY(-8px); }
 
-.tarjeta-juego:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(100, 70, 130, 0.12);
+.burbuja-icono {
+    font-size: 45px; width: 80px; height: 80px; background: #f3ebff;
+    border-radius: 50%; display: flex; justify-content: center;
+    align-items: center; margin: 0 auto 20px;
 }
 
-.icono-juego {
-    font-size: 45px;
-    margin-bottom: 15px;
+.btn-accion-juego {
+    display: block; width: 100%; border: none; padding: 12px;
+    font-weight: bold; font-size: 16px; border-radius: 12px;
+    cursor: pointer; text-decoration: none; margin-top: 20px;
+    background: #7b2cbf; color: white; text-align: center;
 }
 
-.tarjeta-juego h3 {
-    color: #7b2cbf;
-    margin-bottom: 10px;
+/* SECCIÓN INTEGRANTES (Súper Visual) */
+.panel-informacion-creativa { background: white; padding: 40px; border-radius: 24px; text-align: center; }
+.grid-integrantes {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px; margin-top: 30px;
 }
+.avatar-integrante {
+    background: #fdfbfb; padding: 20px; border-radius: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid #eee;
+}
+.avatar-integrante span { font-size: 35px; display: block; margin-bottom: 5px; }
 
-.tarjeta-juego p {
-    font-size: 14px;
-    color: #716085;
-    margin-bottom: 20px;
-    flex-grow: 1;
+/* MODAL MODERNO DEL AHORCADO */
+.capa-modal-juego {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.7); z-index: 2000;
+    display: none; justify-content: center; align-items: center;
 }
+.contenedor-interno-juego {
+    background: white; padding: 30px; border-radius: 25px;
+    max-width: 550px; width: 95%; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.barra-superior-modal {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px;
+}
+.controles-modal-directos { display: flex; gap: 8px; }
+.btn-control-top {
+    border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.btn-control-top.reiniciar { background: #2a9d8f; color: white; }
+.btn-control-top.salir { background: #e63946; color: white; }
 
-.btn-jugar {
-    background: #9d4edd;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.2s;
+.letras-guiones { font-size: 32px; letter-spacing: 6px; font-weight: bold; margin: 30px 0; color: #7b2cbf; }
+.teclado-pantalla { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.teclado-pantalla button {
+    background: #f2ebff; border: none; padding: 12px 5px; font-weight: bold;
+    border-radius: 8px; cursor: pointer; color: #7b2cbf;
 }
+.teclado-pantalla button:disabled { background: #ddd; color: #aaa; cursor: not-allowed; }
+.alertas-juego { font-size: 20px; font-weight: bold; margin-bottom: 15px; min-height: 25px; }
 
-.btn-jugar:hover {
-    background: #7b2cbf;
-}
+.footer-interactivo { background: #2b1d3d; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+.firmas { color: #d8bbff; font-size: 14px; margin-top: 5px; font-weight: bold; }
 
-.text-center {
-    display: block;
-    text-align: center;
-}
-
-/* SECCIÓN ACERCA DE */
-.tarjeta-blanca {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 650px;
-    margin: 20px auto;
-    text-align: left;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.05);
-}
-
-.tarjeta-blanca h3 {
-    color: #7b2cbf;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.tarjeta-blanca h3:first-child {
-    margin-top: 0;
-}
-
-.tarjeta-blanca ul {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-/* PIE DE PÁGINA */
-.pie-pagina {
-    text-align: center;
-    padding: 30px;
-    background: #352642;
-    color: white;
-    margin-top: 50px;
-}
-
-.techs {
-    font-size: 13px;
-    color: #c77dff;
-    margin-top: 5px;
-}
-
-/* VENTANA MODAL FLOTANTE (Para el Ahorcado) */
-.modal-juego {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(53, 38, 66, 0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 200;
-    padding: 20px;
-}
-
-.modal-contenido {
-    background: white;
-    padding: 35px 25px;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.btn-cerrar {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.btn-cerrar:hover {
-    color: #ff7096;
-}
-
-.palabra-lineas {
-    font-size: 28px;
-    letter-spacing: 5px;
-    margin: 25px 0;
-    font-weight: bold;
-    color: #7b2cbf;
-}
-
-.intentos {
-    font-weight: bold;
-    color: #ff7096;
-    margin-bottom: 20px;
-}
-
-.teclado {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-}
-
-.teclado button {
-    background: #f1e4ff;
-    border: none;
-    padding: 10px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #7b2cbf;
-}
-
-.teclado button:hover:not(:disabled) {
-    background: #9d4edd;
-    color: white;
-}
-
-.teclado button:disabled {
-    background: #e2d4f0;
-    color: #bfaecf;
-    cursor: not-allowed;
-}
+@keyframes pulso { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
