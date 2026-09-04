@@ -521,162 +521,164 @@
 </body>
 </html>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CODE POWER | Proyecto Escolar</title>
-    <!-- Conexión correcta al diseño -->
+    <title>CODE POWER ✨ Zona Gamer Interactiva</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- SECTION 1: LOGIN (Inicio de sesión) -->
-    <div id="pantalla-login" class="seccion-login">
-        <div class="tarjeta-login">
-            <h1>CODE POWER</h1>
-            <p class="sub-login">Proyecto de juegos</p>
+    <!-- VENTANA 1: SELECCIÓN DE EDAD (Aparece al inicio) -->
+    <div id="ventana-edad" class="modal-bienvenida">
+        <div class="tarjeta-bienvenida antialiased">
+            <div class="header-animado">⚡ CODE POWER ⚡</div>
+            <h2>¡Hola! Cuéntanos, ¿cuántos años tienes?</h2>
+            <p>Elige tu modo de juego para adaptar la diversión:</p>
             
-            <h2>¡Bienvenido!</h2>
-            <p>Ingresa para comenzar a jugar</p>
-
-            <form id="formulario-login" onsubmit="event.preventDefault();">
-                <div class="campo">
-                    <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" placeholder="Escribe tu usuario" required>
-                </div>
-
-                <div class="campo">
-                    <label for="contrasena">Contraseña</label>
-                    <div class="input-password-container">
-                        <input type="password" id="contrasena" placeholder="Escribe tu contraseña" required>
-                        <button type="button" id="ver-contrasena" class="btn-ojo">👁</button>
-                    </div>
-                </div>
-
-                <button type="submit" id="btn-entrar" class="btn-principal">Entrar</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- SECTION 2: CONTENIDO PRINCIPAL (Oculto al inicio) -->
-    <div id="contenido-plataforma" class="contenido-oculto">
-        
-        <!-- Encabezado / Navegación -->
-        <header class="encabezado">
-            <div class="logo">💻 CODE POWER</div>
-            <nav>
-                <a href="#inicio" class="nav-link activo" data-seccion="inicio">🏠 Inicio</a>
-                <a href="#acerca" class="nav-link" data-seccion="acerca">📚 Acerca de</a>
-                <a href="#salir" id="btn-salir" class="nav-link salir">🚪 Salir</a>
-            </nav>
-        </header>
-
-        <!-- Vista: Inicio -->
-        <main id="seccion-inicio" class="vista-seccion">
-            <section class="hero">
-                <h1>Bienvenido a Code Power</h1>
-                <p>Este es nuestro proyecto de juegos realizado para poner en práctica nuestros conocimientos de programación.</p>
-                <a href="#zona-juegos" class="btn-principal">🎮 Ver juegos</a>
-            </section>
-
-            <section id="zona-juegos" class="zona-juegos">
-                <h2>🎮 Zona de juegos</h2>
-                <p>Elige un juego y demuestra tus habilidades.</p>
-
-                <div class="grid-juegos">
-                    <!-- Ahorcado -->
-                    <div class="tarjeta-juego">
-                        <div class="icono-juego">🔤</div>
-                        <h3>Ahorcado</h3>
-                        <p>Descubre la palabra secreta antes de quedarte sin intentos.</p>
-                        <button class="btn-jugar" id="abrir-ahorcado">Jugar</button>
-                    </div>
-                    <!-- Adivina el número -->
-                    <div class="tarjeta-juego">
-                        <div class="icono-juego">🔢</div>
-                        <h3>Adivina el número</h3>
-                        <p>Intenta descubrir el número secreto entre 1 y 100.</p>
-                        <a href="adivina-el-numero/index.html" class="btn-jugar text-center">Jugar</a>
-                    </div>
-                    <!-- Tic Tac Toe -->
-                    <div class="tarjeta-juego">
-                        <div class="icono-juego">❌</div>
-                        <h3>Tic Tac Toe</h3>
-                        <p>Juega con otra persona y consigue tres símbolos en línea.</p>
-                        <a href="tic-tac-toe/index.html" class="btn-jugar text-center">Jugar</a>
-                    </div>
-                    <!-- Memoria -->
-                    <div class="tarjeta-juego">
-                        <div class="icono-juego">🧠</div>
-                        <h3>Memoria</h3>
-                        <p>Encuentra todas las parejas de cartas.</p>
-                        <a href="memoria/index.html" class="btn-jugar text-center">Jugar</a>
-                    </div>
-                    <!-- Buscaminas -->
-                    <div class="tarjeta-juego">
-                        <div class="icono-juego">💣</div>
-                        <h3>Buscaminas</h3>
-                        <p>Descubre las casillas evitando las minas escondidas.</p>
-                        <a href="buscaminas/index.html" class="btn-jugar text-center">Jugar</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Vista: Acerca de -->
-        <div id="seccion-acerca" class="vista-seccion contenido-oculto">
-            <section class="acerca-de">
-                <h2>📚 Acerca de nuestro proyecto</h2>
-                <p class="sub">Conoce un poco más sobre Code Power</p>
-
-                <div class="tarjeta-blanca">
-                    <h3>¿Qué es Code Power?</h3>
-                    <p>Code Power es un proyecto escolar desarrollado para practicar programación mediante diferentes juegos interactivos.</p>
-                    
-                    <h3>🎯 Objetivo</h3>
-                    <p>Crear una página web sencilla donde los usuarios puedan divertirse mientras se ponen en práctica conceptos de HTML, CSS y JavaScript.</p>
-
-                    <h3>💻 Tecnologías utilizadas</h3>
-                    <ul>
-                        <li><strong>HTML</strong> para la estructura.</li>
-                        <li><strong>CSS</strong> para el diseño.</li>
-                        <li><strong>JavaScript</strong> para la programación.</li>
-                    </ul>
-
-                    <h3>🎮 Juegos incluidos</h3>
-                    <p>Ahorcado, Adivina el número, Tic Tac Toe, Memoria y Buscaminas.</p>
-                </div>
-            </section>
-        </div>
-
-        <!-- Pie de página -->
-        <footer class="pie-pagina">
-            <p>© 2026 Code Power | Proyecto escolar</p>
-            <p class="techs">HTML • CSS • JavaScript</p>
-        </footer>
-    </div>
-
-    <!-- MODAL: VENTANA DEL AHORCADO -->
-    <div id="modal-ahorcado" class="modal-juego">
-        <div class="modal-contenido">
-            <button id="cerrar-ahorcado" class="btn-cerrar">&times;</button>
-            <h2>🔤 Ahorcado</h2>
-            <p>Descubre la palabra secreta.</p>
-            
-            <div class="pantalla-ahorcado">
-                <div id="palabra-secreta" class="palabra-lineas">_ _ _ _ _ _ _ _ _ _</div>
-                <p class="intentos">Intentos restantes: <span id="intentos-ahorcado">6</span></p>
-                
-                <div id="teclado-ahorcado" class="teclado">
-                    <!-- Se generará dinámicamente con JS -->
-                </div>
+            <div class="contenedor-modos">
+                <button id="modo-ninos" class="btn-modo ninos">
+                    <span class="avatar-modo">🎨</span>
+                    <h3>Modo Niños</h3>
+                    <p>Diseño divertido y fácil</p>
+                </button>
+                <button id="modo-jovenes" class="btn-modo jovenes">
+                    <span class="avatar-modo">🚀</span>
+                    <h3>Modo Jóvenes</h3>
+                    <p>Estilo Gamer y competitivo</p>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Conexión correcta a la programación lógica -->
+    <!-- CONTENIDO GENERAL DE LA PLATAFORMA (Oculto al inicio) -->
+    <div id="interfaz-plataforma" class="oculto">
+        
+        <!-- Barra de Navegación Mecánica -->
+        <header class="encabezado-interactivo">
+            <div id="logo-dinamico" class="logo-power">💻 CODE POWER</div>
+            <nav class="menu-navegacion">
+                <button class="tab-link activo" data-target="seccion-juegos">🎮 Zona de Juegos</button>
+                <button class="tab-link" data-target="seccion-acerca">📚 Nuestro Proyecto</button>
+                <button id="btn-cambiar-modo" class="tab-link cambio-edad">🔄 Cambiar Edad</button>
+            </nav>
+        </header>
+
+        <!-- SECCIÓN: PLATAFORMA DE JUEGOS -->
+        <main id="seccion-juegos" class="vista-seccion container">
+            <div class="intro-juegos">
+                <h1 id="titulo-bienvenida">¡A jugar y aprender!</h1>
+                <p id="sub-bienvenida">Selecciona tu reto favorito del menú interactivo.</p>
+            </div>
+
+            <div class="grid-juegos-animados">
+                
+                <!-- 1. AHORCADO (Mecánico/Modal interno) -->
+                <div class="card-juego-interactivo c-ahorcado">
+                    <div class="burbuja-icono">🔤</div>
+                    <h3>Ahorcado</h3>
+                    <p class="desc-kids oculto">¡Encuentra la palabra oculta antes de que se acaben los intentos y salva al personaje!</p>
+                    <p class="desc-teens">Descubre la palabra secreta mediante lógica y deducción de caracteres alfanuméricos.</p>
+                    <button id="btn-jugar-ahorcado" class="btn-accion-juego">¡Jugar Ahora! →</button>
+                </div>
+
+                <!-- 2. ADIVINA EL NÚMERO -->
+                <div class="card-juego-interactivo c-adivina">
+                    <div class="burbuja-icono">🔢</div>
+                    <h3>Adivina el Número</h3>
+                    <p class="desc-kids oculto">¡Adivina el número mágico oculto del 1 al 100! ¿Podrás lograrlo?</p>
+                    <p class="desc-teens">Descifra el valor escalar pseudoaleatorio en el rango de 1 a 100 en el menor número de iteraciones.</p>
+                    <a href="adivina-el-numero/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                </div>
+
+                <!-- 3. TIC TAC TOE -->
+                <div class="card-juego-interactivo c-tictac">
+                    <div class="burbuja-icono">❌</div>
+                    <h3>Tic Tac Toe</h3>
+                    <p class="desc-kids oculto">¡El clásico juego de tres en línea! Reta a tus amigos y gana.</p>
+                    <p class="desc-teens">Despliega tu estrategia matricial bidimensional para alinear tres vectores antes que tu contrincante.</p>
+                    <a href="tic-tac-toe/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                </div>
+
+                <!-- 4. MEMORIA -->
+                <div class="card-juego-interactivo c-memoria">
+                    <div class="burbuja-icono">🧠</div>
+                    <h3>Cartas de Memoria</h3>
+                    <p class="desc-kids oculto">¡Encuentra las parejas de frutas iguales dándole la vuelta a las cartas!</p>
+                    <p class="desc-teens">Maximiza tu retención cognitiva localizando los pares de datos idénticos en el tablero indexado.</p>
+                    <a href="memoria/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                </div>
+
+                <!-- 5. BUSCAMINAS -->
+                <div class="card-juego-interactivo c-buscamina">
+                    <div class="burbuja-icono">💣</div>
+                    <h3>Buscaminas</h3>
+                    <p class="desc-kids oculto">¡Cuidado con las bombas! Limpia el tablero pisando los bloques seguros.</p>
+                    <p class="desc-teens">Ejecuta un barrido lógico de campo minado barriendo celdas seguras mediante análisis numérico de proximidad.</p>
+                    <a href="buscaminas/index.html" class="btn-accion-juego text-center">¡Jugar Ahora! →</a>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- SECCIÓN: ACERCA DE + CRÉDITOS INTEGRANTES -->
+        <div id="seccion-acerca" class="vista-seccion container oculto">
+            <div class="panel-informacion-creativa">
+                <h2>📚 Acerca de Code Power</h2>
+                <p>Este ecosistema de software interactivo fue diseñado con fines pedagógicos y lúdicos.</p>
+                
+                <div class="caja-detalles">
+                    <h3>🎯 Misión Pedagógica</h3>
+                    <p>Fomentar el pensamiento lógico-matemático y la resolución de problemas lógicos mediante mecánicas de juego en HTML5, CSS3 y JavaScript moderno.</p>
+                </div>
+
+                <!-- Créditos Animados Especiales -->
+                <div class="seccion-creditos-equipo">
+                    <h3>⭐ Desarrollado con ❤️ por el Equipo:</h3>
+                    <div class="grid-integrantes">
+                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Yaniris Durán</h4></div>
+                        <div class="avatar-integrante"><span>👩>💻</span><h4>Daniela Murillo</h4></div>
+                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Sofia Montes</h4></div>
+                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Taliana Ortiz</h4></div>
+                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Lauren Oliveros</h4></div>
+                        <div class="avatar-integrante"><span>👩‍💻</span><h4>Keyla Miranda</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer-interactivo">
+            <p>© 2026 Code Power | Proyecto Escolar SENA</p>
+            <p class="firmas">Yaniris • Daniela • Sofia • Taliana • Lauren • Keyla</p>
+        </footer>
+    </div>
+
+    <!-- VENTANA MODAL DINÁMICA: JUEGO DEL AHORCADO -->
+    <div id="ventana-modal-ahorcado" class="capa-modal-juego">
+        <div class="contenedor-interno-juego">
+            <div class="barra-superior-modal">
+                <h3>🔤 Mini-Juego: Ahorcado</h3>
+                <div class="controles-modal-directos">
+                    <button id="btn-reiniciar-ahorcado-rapido" class="btn-control-top reiniciar">🔄 Reiniciar Partida</button>
+                    <button id="btn-cerrar-ahorcado-modal" class="btn-control-top salir">↩️ Regresar al Menú</button>
+                </div>
+            </div>
+
+            <div class="area-juego-ahorcado">
+                <div id="contenedor-palabra-secreta" class="letras-guiones">_ _ _ _ _</div>
+                <div class="contador-fallos">Intentos restantes: <strong id="marcador-intentos-ahorcado">6</strong></div>
+                <p id="mensaje-resultado-ahorcado" class="alertas-juego"></p>
+                <div id="letras-teclado-virtual" class="teclado-pantalla"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
+
