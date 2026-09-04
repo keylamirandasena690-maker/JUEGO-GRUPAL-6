@@ -1,339 +1,179 @@
 const tablero = document.getElementById("tablero");
 const mensaje = document.getElementById("mensaje");
 const botonReiniciar = document.getElementById("reiniciar");
-
-const minasTexto = document.getElementById("minas");
-const banderasTexto = document.getElementById("banderas");
 const tiempoTexto = document.getElementById("tiempo");
 
-// Configuración del juego
 const filas = 10;
 const columnas = 10;
 const cantidadMinas = 10;
 
 let casillas = [];
-let minas = [];
-let banderas = 0;
-let casillasDescubiertas = 0;
 let juegoTerminado = false;
 let tiempo = 0;
-let temporizador;
+let intervalo;
 
-
-// Crear el tablero
-
-function crearTablero() {
-
+function iniciarJuego() {
     tablero.innerHTML = "";
-
-    casillas = [];
-    minas = [];
-    banderas = 0;
-    casillasDescubiertas = 0;
-    juegoTerminado = false;
+    mensaje.textContent = "";
     tiempo = 0;
+    juegoTerminado = false;
+    casillas = [];
 
-    clearInterval(temporizador);
+    tiempoTexto.textContent = tiempo;
 
-    tiempoTexto.textContent = "0";
-    banderasTexto.textContent = "0";
-    minasTexto.textContent = cantidadMinas;
+    clearInterval(intervalo);
 
-    mensaje.textContent =
-        "¡Encuentra las casillas seguras!";
-
-    mensaje.classList.remove("exito");
-    mensaje.classList.remove("derrota");
-
-    // Crear las casillas
-    for (let i = 0; i < filas * columnas; i++) {
-
-        const casilla = document.createElement("button");
-
-        casilla.classList.add("casilla");
-
-        casilla.dataset.posicion = i;
-
-        casilla.addEventListener("click", descubrirCasilla);
-
-        casilla.addEventListener("contextmenu", colocarBandera);
-
-        tablero.appendChild(casilla);
-
-        casillas.push(casilla);
-    }
-
-    // Crear las minas
-    while (minas.length < cantidadMinas) {
-
-        const posicion = Math.floor(
-            Math.random() * (filas * columnas)
-        );
-
-        if (!minas.includes(posicion)) {
-            minas.push(posicion);
-        }
-    }
-
-    // Iniciar el tiempo
-    temporizador = setInterval(function() {
-
+    intervalo = setInterval(function() {
         if (!juegoTerminado) {
             tiempo++;
             tiempoTexto.textContent = tiempo;
         }
-
     }, 1000);
-}
 
+    for (let fila = 0; fila < filas; fila++) {
+        for (let columna = 0; columna < columnas; columna++) {
 
-// Descubrir una casilla
+            const casilla = {
+                fila: fila,
+                columna: columna,
+                mina: false,
+                descubierta: false,
+                bandera: false,
+                elemento: null
+            };
 
-function descubrirCasilla(event) {
+            const elemento = document.createElement("div");
 
-    if (juegoTerminado) {
-        return;
+            elemento.classList.add("casilla");
+
+            elemento.addEventListener("click", function() {
+                descubrirCasilla(casilla);
+            });
+
+            elemento.addEventListener("contextmenu", function(evento) {
+                evento.preventDefault();
+                colocarBandera(casilla);
+            });
+
+            casilla.elemento = elemento;
+
+            casillas.push(casilla);
+            tablero.appendChild(elemento);
+        }
     }
 
-    const casilla = event.target;
-    const posicion = Number(casilla.dataset.posicion);
+    colocarMinas();
+}
 
+function colocarMinas() {
+    let minasColocadas = 0;
+
+    while (minasColocadas < cantidadMinas) {
+        const posicion = Math.floor(Math.random() * casillas.length);
+        const casilla = casillas[posicion];
+
+        if (!casilla.mina) {
+            casilla.mina = true;
+            minasColocadas++;
+        }
+    }
+}
+
+function obtenerVecinas(casilla) {
+    return casillas.filter(function(otra) {
+        return (
+            Math.abs(otra.fila - casilla.fila) <= 1 &&
+            Math.abs(otra.columna - casilla.columna) <= 1 &&
+            otra !== casilla
+        );
+    });
+}
+
+function contarMinas(casilla) {
+    return obtenerVecinas(casilla).filter(function(vecina) {
+        return vecina.mina;
+    }).length;
+}
+
+function descubrirCasilla(casilla) {
     if (
-        casilla.classList.contains("descubierta") ||
-        casilla.classList.contains("bandera")
+        juegoTerminado ||
+        casilla.descubierta ||
+        casilla.bandera
     ) {
         return;
     }
 
-    // Si tiene una mina
-    if (minas.includes(posicion)) {
+    casilla.descubierta = true;
+    casilla.elemento.classList.add("descubierta");
 
-        casilla.textContent = "💣";
-
-        casilla.classList.add("mina");
-
-        mostrarMinas();
-
-        mensaje.textContent =
-            "💥 ¡Perdiste! Encontraste una mina.";
-
-        mensaje.classList.add("derrota");
-
-        juegoTerminado = true;
-
-        clearInterval(temporizador);
-
+    if (casilla.mina) {
+        casilla.elemento.textContent = "💣";
+        casilla.elemento.classList.add("mina");
+        terminarJuego(false);
         return;
     }
 
-    // Descubrir la casilla
-    descubrirSegura(posicion);
+    const minasCercanas = contarMinas(casilla);
+
+    if (minasCercanas > 0) {
+        casilla.elemento.textContent = minasCercanas;
+    } else {
+        obtenerVecinas(casilla).forEach(function(vecina) {
+            descubrirCasilla(vecina);
+        });
+    }
 
     comprobarVictoria();
 }
 
-
-// Descubrir una casilla segura
-
-function descubrirSegura(posicion) {
-
-    const casilla = casillas[posicion];
-
-    if (
-        casilla.classList.contains("descubierta") ||
-        casilla.classList.contains("bandera")
-    ) {
+function colocarBandera(casilla) {
+    if (juegoTerminado || casilla.descubierta) {
         return;
     }
 
-    casilla.classList.add("descubierta");
+    casilla.bandera = !casilla.bandera;
 
-    casillasDescubiertas++;
-
-    const minasCercanas = contarMinasCercanas(posicion);
-
-    if (minasCercanas > 0) {
-
-        casilla.textContent = minasCercanas;
-
-        casilla.classList.add(
-            "numero-" + minasCercanas
-        );
-
+    if (casilla.bandera) {
+        casilla.elemento.textContent = "🚩";
+        casilla.elemento.classList.add("bandera");
     } else {
-
-        // Descubrir casillas cercanas automáticamente
-        const vecinos = obtenerVecinos(posicion);
-
-        vecinos.forEach(function(vecino) {
-
-            if (!minas.includes(vecino)) {
-                descubrirSegura(vecino);
-            }
-
-        });
+        casilla.elemento.textContent = "";
+        casilla.elemento.classList.remove("bandera");
     }
 }
-
-
-// Contar minas cercanas
-
-function contarMinasCercanas(posicion) {
-
-    let cantidad = 0;
-
-    const vecinos = obtenerVecinos(posicion);
-
-    vecinos.forEach(function(vecino) {
-
-        if (minas.includes(vecino)) {
-            cantidad++;
-        }
-
-    });
-
-    return cantidad;
-}
-
-
-// Obtener las casillas vecinas
-
-function obtenerVecinos(posicion) {
-
-    const vecinos = [];
-
-    const fila = Math.floor(posicion / columnas);
-    const columna = posicion % columnas;
-
-    for (let cambioFila = -1; cambioFila <= 1; cambioFila++) {
-
-        for (
-            let cambioColumna = -1;
-            cambioColumna <= 1;
-            cambioColumna++
-        ) {
-
-            if (
-                cambioFila === 0 &&
-                cambioColumna === 0
-            ) {
-                continue;
-            }
-
-            const nuevaFila = fila + cambioFila;
-            const nuevaColumna = columna + cambioColumna;
-
-            if (
-                nuevaFila >= 0 &&
-                nuevaFila < filas &&
-                nuevaColumna >= 0 &&
-                nuevaColumna < columnas
-            ) {
-
-                const nuevaPosicion =
-                    nuevaFila * columnas + nuevaColumna;
-
-                vecinos.push(nuevaPosicion);
-            }
-        }
-    }
-
-    return vecinos;
-}
-
-
-// Colocar o quitar banderas
-
-function colocarBandera(event) {
-
-    event.preventDefault();
-
-    if (juegoTerminado) {
-        return;
-    }
-
-    const casilla = event.target;
-
-    if (casilla.classList.contains("descubierta")) {
-        return;
-    }
-
-    if (casilla.classList.contains("bandera")) {
-
-        casilla.classList.remove("bandera");
-
-        casilla.textContent = "";
-
-        banderas--;
-
-    } else {
-
-        if (banderas >= cantidadMinas) {
-            return;
-        }
-
-        casilla.classList.add("bandera");
-
-        casilla.textContent = "🚩";
-
-        banderas++;
-    }
-
-    banderasTexto.textContent = banderas;
-}
-
-
-// Mostrar todas las minas
-
-function mostrarMinas() {
-
-    minas.forEach(function(posicion) {
-
-        const casilla = casillas[posicion];
-
-        casilla.textContent = "💣";
-
-        casilla.classList.add("mina");
-
-    });
-}
-
-
-// Comprobar victoria
 
 function comprobarVictoria() {
+    const casillasSeguras = casillas.filter(function(casilla) {
+        return !casilla.mina;
+    });
 
-    const casillasSeguras =
-        filas * columnas - cantidadMinas;
+    const descubiertas = casillasSeguras.filter(function(casilla) {
+        return casilla.descubierta;
+    });
 
-    if (casillasDescubiertas === casillasSeguras) {
-
-        juegoTerminado = true;
-
-        clearInterval(temporizador);
-
-        mensaje.textContent =
-            "🎉 ¡Ganaste! Descubriste todas las casillas seguras.";
-
-        mensaje.classList.add("exito");
-
-        minas.forEach(function(posicion) {
-
-            casillas[posicion].textContent = "🚩";
-
-        });
+    if (descubiertas.length === casillasSeguras.length) {
+        terminarJuego(true);
     }
 }
 
+function terminarJuego(gano) {
+    juegoTerminado = true;
+    clearInterval(intervalo);
 
-// Reiniciar juego
+    casillas.forEach(function(casilla) {
+        if (casilla.mina) {
+            casilla.elemento.textContent = "💣";
+        }
+    });
 
-botonReiniciar.addEventListener(
-    "click",
-    crearTablero
-);
+    if (gano) {
+        mensaje.textContent = "🎉 ¡Ganaste! Encontraste todas las casillas seguras.";
+    } else {
+        mensaje.textContent = "💥 ¡Perdiste! Tocaste una mina.";
+    }
+}
 
+botonReiniciar.addEventListener("click", iniciarJuego);
 
-// Iniciar el juego al cargar la página
-
-crearTablero();
+iniciarJuego();
