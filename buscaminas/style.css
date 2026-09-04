@@ -1,366 +1,108 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
-
-    background: linear-gradient(
-        135deg,
-        #eee6ff,
-        #e5f1ff,
-        #ffe8f4
-    );
-
-    color: #333;
+    background: linear-gradient(135deg, #eee1ff, #dff4ff);
+    color: #352642;
+    text-align: center;
+    padding: 25px;
 }
 
-/* ENCABEZADO */
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 20px 8%;
-
-    background: white;
-
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.logo {
-    color: #7045ad;
-    font-size: 24px;
-    font-weight: bold;
+.contenedor {
+    max-width: 650px;
+    margin: auto;
 }
 
 .volver {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #7b2cbf;
     text-decoration: none;
-
-    color: #7045ad;
-
-    background: #f0e8ff;
-
-    padding: 10px 18px;
-
-    border-radius: 20px;
-
     font-weight: bold;
-
-    transition: 0.3s;
-}
-
-.volver:hover {
-    background: #dfcff8;
-}
-
-/* CONTENIDO */
-
-main {
-    min-height: calc(100vh - 140px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 40px 20px;
-}
-
-.juego {
-    width: 100%;
-    max-width: 650px;
-
-    background: white;
-
-    padding: 40px;
-
-    border-radius: 25px;
-
-    box-shadow: 0 12px 35px rgba(80, 55, 110, 0.15);
-}
-
-/* TITULO */
-
-.titulo {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-
-    margin-bottom: 30px;
-}
-
-.emoji {
-    font-size: 55px;
 }
 
 h1 {
-    color: #7045ad;
-    font-size: 34px;
-    margin-bottom: 5px;
-}
-
-.titulo p {
-    color: #777;
-    font-size: 16px;
-}
-
-/* INSTRUCCIONES */
-
-.instrucciones {
-    background: #f7f2ff;
-
-    padding: 22px;
-
-    border-radius: 18px;
-
-    margin-bottom: 25px;
-}
-
-.instrucciones h2 {
-    color: #7045ad;
-
-    font-size: 20px;
-
+    color: #7b2cbf;
     margin-bottom: 12px;
 }
 
-.instrucciones p {
-    color: #666;
-
-    line-height: 1.6;
-
-    margin-bottom: 6px;
-}
-
-/* ESTADISTICAS */
-
-.estadisticas {
+.informacion {
     display: flex;
     justify-content: center;
-    gap: 12px;
-
-    margin-bottom: 25px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px 0;
 }
 
-.estadistica {
-    flex: 1;
-
-    text-align: center;
-
-    background: #faf8ff;
-
-    padding: 15px;
-
-    border-radius: 15px;
-
-    border: 1px solid #eee4ff;
+button {
+    border: none;
+    background: #9d4edd;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.estadistica span {
-    font-size: 24px;
+button:hover {
+    background: #7b2cbf;
 }
-
-.estadistica p {
-    color: #777;
-
-    font-size: 13px;
-
-    margin: 5px 0;
-}
-
-.estadistica strong {
-    color: #7045ad;
-
-    font-size: 20px;
-}
-
-/* TABLERO */
 
 .tablero {
-    width: 330px;
-    height: 330px;
-
-    margin: 0 auto;
-
     display: grid;
-
     grid-template-columns: repeat(10, 1fr);
-
     gap: 4px;
-
-    padding: 8px;
-
-    background: #e7dcfa;
-
-    border-radius: 15px;
+    max-width: 550px;
+    margin: auto;
 }
 
 .casilla {
-    border: none;
-
+    aspect-ratio: 1;
+    background: #9d4edd;
     border-radius: 5px;
-
-    background: #bda6e6;
-
-    color: #7045ad;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.casilla:hover {
-    background: #aa8cda;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
 }
 
 .casilla.descubierta {
-    background: #faf8ff;
-
+    background: white;
+    color: #7b2cbf;
     cursor: default;
 }
 
 .casilla.mina {
-    background: #f3c4d9;
-
-    color: #b33d70;
+    background: #ff7096;
 }
 
 .casilla.bandera {
-    background: #d8c7f5;
-
-    color: #7045ad;
+    background: #c77dff;
 }
-
-/* COLORES DE LOS NUMEROS */
-
-.numero-1 {
-    color: #4285c5;
-}
-
-.numero-2 {
-    color: #4b9b61;
-}
-
-.numero-3 {
-    color: #d15b5b;
-}
-
-.numero-4 {
-    color: #7045ad;
-}
-
-/* MENSAJE */
 
 .mensaje {
-    text-align: center;
-
-    min-height: 25px;
-
-    margin-top: 22px;
-
-    color: #7045ad;
-
-    font-size: 17px;
-
+    margin-top: 25px;
+    font-size: 20px;
     font-weight: bold;
-
-    line-height: 1.5;
+    color: #7b2cbf;
 }
-
-.mensaje.exito {
-    color: #4c9664;
-}
-
-.mensaje.derrota {
-    color: #c14d75;
-}
-
-/* REINICIAR */
-
-.reiniciar {
-    display: block;
-
-    margin: 25px auto 0;
-
-    padding: 12px 25px;
-
-    border: none;
-
-    border-radius: 20px;
-
-    background: #f2dfef;
-
-    color: #704269;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.reiniciar:hover {
-    background: #e4c8df;
-}
-
-/* FOOTER */
-
-footer {
-    text-align: center;
-
-    padding: 20px;
-
-    color: #777;
-
-    font-size: 14px;
-}
-
-/* RESPONSIVE */
 
 @media (max-width: 600px) {
-
-    header {
-        padding: 18px 5%;
-    }
-
-    .logo {
-        font-size: 20px;
-    }
-
-    .juego {
-        padding: 25px 15px;
-    }
-
-    .titulo {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .estadisticas {
-        gap: 7px;
-    }
-
-    .estadistica {
-        padding: 12px 5px;
+    body {
+        padding: 12px;
     }
 
     .tablero {
-        width: 290px;
-        height: 290px;
-        gap: 3px;
-        padding: 6px;
+        gap: 2px;
     }
 
     .casilla {
