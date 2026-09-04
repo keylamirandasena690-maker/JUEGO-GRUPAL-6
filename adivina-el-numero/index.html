@@ -1,75 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Adivina el Número | Code Power</title>
-    <link rel="stylesheet" href="adivina.css">
+
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">Code Power</div>
-        <a href="../index.html" class="volver">← Volver</a>
-    </header>
+    <main class="contenedor">
 
-    <main>
-        <section class="juego">
+        <a href="../../index.html" class="volver">
+            ← Volver al inicio
+        </a>
 
-            <div class="icono">🔢</div>
+        <h1>🔢 Adivina el Número</h1>
 
-            <h1>Adivina el Número</h1>
+        <p>
+            Intenta descubrir el número secreto del 1 al 100.
+        </p>
 
-            <p class="descripcion">
-                Hemos pensado un número entre <strong>1 y 100</strong>.
-                ¿Puedes descubrir cuál es?
-            </p>
+        <input
+            type="number"
+            id="numero"
+            min="1"
+            max="100"
+            placeholder="Escribe un número"
+        >
 
-            <div class="informacion">
-                <div>
-                    <span>Intentos</span>
-                    <strong id="intentos">0</strong>
-                </div>
+        <button id="comprobar">
+            Comprobar
+        </button>
 
-                <div>
-                    <span>Rango</span>
-                    <strong>1 - 100</strong>
-                </div>
-            </div>
+        <p id="mensaje" class="mensaje"></p>
 
-            <div class="zona-juego">
+        <p>
+            Intentos:
+            <strong id="intentos">0</strong>
+        </p>
 
-                <label for="numero">Escribe tu número:</label>
+        <button id="reiniciar">
+            Reiniciar juego
+        </button>
 
-                <input 
-                    type="number" 
-                    id="numero" 
-                    min="1" 
-                    max="100"
-                    placeholder="Ej: 50"
-                >
-
-                <button id="btnAdivinar">Adivinar</button>
-
-                <p id="mensaje" class="mensaje">
-                    ¡Escribe un número para comenzar!
-                </p>
-
-            </div>
-
-            <button id="btnReiniciar" class="reiniciar">
-                🔄 Jugar de nuevo
-            </button>
-
-        </section>
     </main>
 
-    <footer>
-        <p>© 2026 Code Power | Proyecto SENA</p>
-    </footer>
-
-    <script src="adivina.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
