@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Buscaminas | Code Power</title>
+
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">CODE POWER</div>
+
+        <a href="../../index.html" class="volver">
+            ← Volver
+        </a>
+    </header>
+
+    <main>
+
+        <section class="juego">
+
+            <div class="titulo">
+                <span class="emoji">💣</span>
+
+                <div>
+                    <h1>Buscaminas</h1>
+                    <p>Encuentra las casillas seguras</p>
+                </div>
+            </div>
+
+            <div class="instrucciones">
+                <h2>¿Cómo se juega?</h2>
+
+                <p>
+                    Descubre todas las casillas que no contienen minas.
+                </p>
+
+                <p>
+                    Si encuentras una mina, pierdes. Los números indican
+                    cuántas minas hay cerca de cada casilla.
+                </p>
+            </div>
+
+            <div class="estadisticas">
+
+                <div class="estadistica">
+                    <span>💣</span>
+                    <p>Minas</p>
+                    <strong id="minas">10</strong>
+                </div>
+
+                <div class="estadistica">
+                    <span>🚩</span>
+                    <p>Banderas</p>
+                    <strong id="banderas">0</strong>
+                </div>
+
+                <div class="estadistica">
+                    <span>⏱️</span>
+                    <p>Tiempo</p>
+                    <strong id="tiempo">0</strong>
+                </div>
+
+            </div>
+
+            <div id="tablero" class="tablero"></div>
+
+            <p id="mensaje" class="mensaje">
+                ¡Encuentra las casillas seguras!
+            </p>
+
+            <button id="reiniciar" class="reiniciar">
+                🔄 Nuevo juego
+            </button>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Code Power | Proyecto SENA 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
