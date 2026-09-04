@@ -1707,8 +1707,6 @@ footer p {
 
 
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -1836,7 +1834,7 @@ body {
 .m-celda.safe { background: white; color: #7b2cbf; cursor: default; }
 .m-celda.boom { background: #ff477e; animation: shake 0.3s ease-in-out; box-shadow: 0 0 15px #ff477e; }
 
-/* IMPACTO DE EXPLOSIÓN (SACUDIDA) */
+/* IMPACTO DE EXPLOSIÓN */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-8px) rotate(-4deg); }
@@ -1850,9 +1848,7 @@ body {
 
 .footer-consola { text-align: center; padding: 25px; background: #140d24; margin-top: 50px; border-top: 2px solid #221747; color: #75698c; }
 
-/* ======================================================== */
-/* 🎨 ADAPTACIÓN INTEGRAL: MODO INFANTIL / NIÑOS (RECREATIVO) */
-/* ======================================================== */
+/* ADAPTACIÓN INTEGRAL: MODO INFANTIL */
 body.kids-theme { background: #fffbe6; color: #2b1d3d; }
 body.kids-theme .encabezado-gamer, body.kids-theme .barra-escape-arcade { background: #ffd166; border-color: #ffb703; }
 body.kids-theme .arcade-card, body.kids-theme .chica, body.kids-theme .modulo-juego, body.kids-theme .tictac-celda, body.kids-theme .feedback-contenido { background: #ffffff; border-color: #ffb703; color: #2b1d3d; box-shadow: 0 8px 20px rgba(255,183,3,0.15); }
